@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "*": ["./*"],
+            "src/*": ["./src/*"]
+        },
+        "typeRoots": ["./types"],
+        "types": [
+            "node",
+            "@wdio/sync",
+            "chai",
+            "@wdio/cucumber-framework",
+            "jest",
+            "reflect-metadata"
+        ],
+        "target": "es6",
+        "module": "CommonJS",
+        "lib": ["es2018", "dom"],
+        "experimentalDecorators": true
+        
+    },
+    "compileOnSave": false,
+    "include": ["./src/**/*.ts"]
+}

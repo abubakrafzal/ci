@@ -1,0 +1,48 @@
+// async open() {
+//     await super.open('/'); //provide your additional URL if any. this will append to the baseUrl to form complete URL
+//     browser.pause(1000);
+// }
+
+//todo getter method to element
+//   async enterText (item) {
+//
+//     let foo = new Homepage
+//
+//     let val = await foo.searchInput;
+//         await browser.pause(5000);
+//       await val.clearValue();
+//       await browser.pause(10000);
+//       await val.setValue(item);
+//       await super.clearInputField(val);
+//       await this.setInputField("add","additon",val);
+//
+//
+//     await browser.pause(1000);
+//     let OmsURL;
+//     if(process.env.NODE_ENV === 'prod') {
+//       OmsURL = 'https://stackoverflow.com/';
+//     } else {
+//       OmsURL= "https://stackoverflow.com/";
+//     }
+//     await browser.newWindow(OmsURL);
+//     // browser.switchWindow("stackoverflow.com")
+//     await browser.url(OmsURL)
+//       this.closeLastOpenedWindow("window")
+//
+//       // await super.closeAllButFirstTab("tab");
+//     await browser.pause(10000);
+//
+//   }
+//
+// search() {
+//     // super.open(OmsURL)
+//     // this.searchButton.click();
+// }
+//! Warning
+// addNewBtn() {
+//     let elem = new Homepage();
+//     let val =  elem.addpetvar;
+//     val.waitForExist(4000);
+//     val.scrollIntoView();
+//     browser.execute('arguments[0].click();', val);
+//     browser.pause(10000);

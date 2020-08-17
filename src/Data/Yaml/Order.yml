@@ -1,0 +1,7 @@
+Pet_dog:
+  name: automation_pet
+  species: Dog
+  breed: Akita
+  color: Black
+  age: Less than 1 year old
+
