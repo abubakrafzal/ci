@@ -29,7 +29,10 @@ class Homepage extends Page {
         let actualTitle: string = await browser.getTitle();
         let expectedTitle =
             'Custom Stuffed Animals of Pets - 100% Premium Quality | Cuddle Clones';
-       await expect(actualTitle).toEqual(expectedTitle);
+        await expect(actualTitle).toEqual(expectedTitle);
+        browser.maximizeWindow();
+        let val = await browser.getWindowSize();
+         console.log(val);
     }
     async gotoMyAccount() {
         let expectedUrl = 'https://qa.cuddleclones.com/my-account/';
@@ -53,10 +56,7 @@ class Homepage extends Page {
         // this.addPetBTN.scrollIntoView();
         // browser.execute('arguments[0].click();', this.addPetBTN);
     }
-    isSearched() {
-        this.resultsList.waitForDisplayed();
-        return this.resultsList.isDisplayed();
-    }
+ 
 
     async closeLastOpenedWindow(obsolete: string) {
         const lastWindowHandle = await browser.getWindowHandles().slice(-1)[0];

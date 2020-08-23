@@ -60,7 +60,7 @@ const capabilities = debug
                       // '--headless',
                       // '--disable-gpu',
 
-                      '--window-size=1920,1080',
+                      '--window-size=1366,768',
                       '--disable-software-rasterizer',
                   ],
               },
@@ -166,7 +166,8 @@ exports.config = {
     baseUrl: baseUrl,
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 20000,
+    waitforInterval:1000,
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
@@ -180,7 +181,7 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: [
-        'selenium-standalone',
+        ['selenium-standalone'],
         [
             slack,
             {
@@ -373,6 +374,7 @@ exports.config = {
         try {
             console.log('TRY Before Scenario');
             browser.url('/');
+
         } catch (e) {
             console.log('Catch Before Scenario  s');
             console.log(e.message);
@@ -381,8 +383,9 @@ exports.config = {
     /**
      * Runs before a Cucumber step
      */
-    // beforeStep: function (uri, feature, stepData, context) {
-    // },
+    beforeStep: function (uri, feature, stepData, context) {
+
+    },
     /**
      * Runs after a Cucumber step
      */

@@ -46,3 +46,190 @@
 //     val.scrollIntoView();
 //     browser.execute('arguments[0].click();', val);
 //     browser.pause(10000);
+
+ saveToJson(){
+        let data = {order_num:this.orderIdGlobal};
+        super.syncJSonRead(jsonOrderPath,data);
+
+        // console.log(this.orderIdGlobal);
+        // let obj = {
+        //     table: [],
+        //
+        // };
+        // obj.table.push({"orderId":this.orderIdGlobal });
+        // let json = JSON.stringify(obj);
+        // fs.writeFileSync(jsonOrderPath, json);
+
+
+
+  // obj.val.forEach((x) => {
+        //
+        //     // If the bookID is the one we are looking for, set it as null
+        //     if (x.orderId === this.orderIdGlobal) {
+        //         x.orderId = null;
+        //         fs.writeFileSync("./src/Data/Json/OrderData.json", JSON.stringify(x.orderId));
+        //
+        //     }
+        // });
+
+        // obj.table2.push({"orderId2":this.orderIdGlobal });
+        // let json2 = JSON.stringify(obj);
+
+        // fs.writeFileSync("./src/Data/Json/OrderData.json", json2);
+
+
+        // fs.readFileSync('./src/Data/Json/OrderData.json', 'utf8', function readFileCallback(err, data){
+        //     if (err){
+        //         console.log(err);
+        //     } else {
+        //         obj = JSON.parse(data); //now it an object
+        //         obj.table.push({testid: this.orderIdGlobal}); //add some data
+        //         json = JSON.stringify(obj); //convert it back to json
+        //         fs.appendFileSync(' ./src/Data/Json/OrderData.json  ', json, 'utf8'); // write it back
+        //     }});
+
+    }
+    getBillingFirstName(){
+            let billingFirstNameElem = $(ElementAdmin.billingfirstNameElem);
+            let billingFirstNameText = billingFirstNameElem.getAttribute("value");
+
+            super.syncJSonRead(jsonOrderPath,{billing_firstName: billingFirstNameText});
+        // super.syncUpdateYaml(testYmlPath,"first_name",billingFirstNameText);
+        // let data=    super.syncReadYaml(testYmlPath);
+        // data.Order_data.first_name=billingFirstNameText;
+        // super.syncWriteYaml(testYmlPath,data);
+            let response = fs.readFileSync(jsonOrderPath, 'utf8');
+            let parsed = JSON.parse(response);
+            let obj = {Orderdata:parsed}
+            super.syncWriteYaml(testYmlPath,obj);
+            let reader = testValue['Orderdata']['first_name'];
+            console.log("reader"+reader);
+            browser.pause(100000);
+        }
+            jsonReadernew(filePath,data, cb) {
+                fs.readFile(filePath, (err, fileData) => {
+                    if (err) {
+                        return cb && cb(err)
+                    }
+                    try {
+                        let parsed = JSON.parse(fileData); //now it an object
+
+                        parsed = { ...parsed, ...data };
+                        let json = JSON.stringify(parsed); //convert it back to json
+                        const object = JSON.parse(fileData)
+                        return cb && cb(null, object)
+                    } catch(err) {
+                        return cb && cb(err)
+                    }
+                })
+            }
+
+
+
+ //? readers of json and Yaml
+    appendYaml(yamlPath, data) {
+        // let data = {
+        //     "A":[1,2,3],"B":[9,5,6]
+        //
+        // };
+        data = [];
+        let str = '1';
+        let str2 = '2';
+        let w = data.push(str, str2);
+        let yamload = yaml.load(yamlPath);
+        let yamlStr = yaml.safeDump(data, {
+            styles: {
+                '!!omap': 'canonical', // dump null as ~
+            },
+            sortKeys: true, // sort object keys
+        });
+        fs.appendFileSync(yamload, yamlStr, 'utf8');
+    }
+  writeYaml(yamlPath, data) {
+        let yamload = yaml.load(yamlPath);
+        let yamlStr = yaml.safeDump(data, {
+            styles: {
+                '!!omap': 'canonical',
+            },
+            sortKeys: true,
+        });
+
+        fs.writeFileSync(yamload, yamlStr, 'utf8');
+    }
+    syncReadYaml(testYmlPath){
+        const raw =   fs.readFileSync(testYmlPath);
+        return YAML.safeLoad(raw);
+    }
+       syncUpdateYaml(testYmlPath,getYamlvalue,value){
+            try {
+
+                // Load the YAML
+                const raw =   fs.readFileSync(testYmlPath);
+                const data =  YAML.safeLoad(raw);
+                // Show the YAML
+
+                // Modify the YAML
+                // let getYamlvalue =  path.Order_data.order_id;  // Dorothy
+
+                data.Order_data.getYamlvalue = value; // Dorothy
+
+                // Saved the YAML
+                const yaml =  YAML.safeDump(data);
+                fs.writeFileSync(testYmlPath, yaml, function (err, file) {
+                    if (err) throw err;
+                });
+                console.log(data);
+
+            } catch (ex) {
+                // Show error
+                console.log(ex);
+            }
+
+        }
+
+        syncYamlAppend(testYmlPath, value) {
+            try {
+                // Load the YAML
+                const raw = fs.readFileSync(testYmlPath);
+                const data = YAML.safeLoad(raw);
+
+                console.log(data);
+                data.Pet_dog.pet_id = value; // Dorothy
+                console.log(data);
+                // Saved the YAML
+                const yaml = YAML.safeDump(data);
+                fs.writeFileSync(testYmlPath, yaml, function(err, file) {
+                    if (err) throw err;
+                });
+                console.log(data);
+            } catch (ex) {
+                // Show error
+                console.log(ex);
+            }
+        }
+
+          saveToYaml(){
+                try {
+
+                    // Load the YAML
+                    const raw =   fs.readFileSync(testYmlPath);
+                    const data =  YAML.safeLoad(raw);
+
+                    // Show the YAML
+
+                    // Modify the YAML
+                    data.Order_data.order_id = this.orderIdGlobal; // Dorothy
+
+                    // Saved the YAML
+                    const yaml =  YAML.safeDump(data);
+                    fs.writeFileSync(testYmlPath, yaml, function (err, file) {
+                        if (err) throw err;
+                    });
+                    console.log(data);
+
+                } catch (ex) {
+                    // Show error
+                    console.log(ex);
+                }
+
+            }

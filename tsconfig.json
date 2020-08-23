@@ -15,7 +15,6 @@
             "reflect-metadata"
         ],
         "target": "es6",
-        "module": "CommonJS",
         "lib": ["es2018", "dom"],
         "experimentalDecorators": true
         

@@ -1,11 +1,15 @@
-
 const fetch = require('node-fetch');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
+const yaml = require('js-yaml');
+const YAML = require('js-yaml');
 
+const fs = require('fs');
+const fsextra= require('fs-extra');
 export default class Page {
+    public orderIdGlobal: number;
+    public petIdGlobal: number;
 
-    
     public async clearInputField(selector) {
         let element = await selector;
         await element.clearValue();
@@ -16,20 +20,21 @@ export default class Page {
 
         await element[command](value || '');
     }
-     waitAndclick(selector) {
+    async waitAndclick(selector) {
         try {
-             selector.waitForClickable();
-             selector.scrollIntoView();
-             selector.click();
-        } catch (Error) {
-            console.log(Error);
+            await selector.scrollIntoView();
+            await selector.waitForClickable();
+            await selector.click();
+        } catch (err) {
+            console.log(err);
         }
     }
-   async displayAndclick(selector) {
+    async displayAndclick(selector) {
         try {
-            await selector.waitForClickable();
-           await selector.scrollIntoView();
-           await selector.click();
+            await selector.scrollIntoView();
+            await selector.waitForDisplayed();
+
+            await selector.click();
         } catch (Error) {
             throw new Error('Could not click on selector: ' + selector);
         }
@@ -44,13 +49,22 @@ export default class Page {
         }
     }
     async staticJsClick(selector) {
-        try { 
+        try {
             await browser.pause(3000);
             await selector.scrollIntoView();
-            await browser.execute('arguments[0].click();',selector)
-
+            await browser.execute('arguments[0].click();', selector);
+        } catch (e) {
+            e.message();
         }
-        catch(e){}
+    }
+    async waitTillViewPort(selector) {
+        await browser.waitUntil(() => selector.isDisplayedInViewport(), {
+            timeout: 10000,
+            timeoutMsg:
+                " '" +
+                selector +
+                "' this element doesnt appear in displayPort waitUntill Command",
+        });
     }
     async closeAllButFirstTab(obsolete: string) {
         const windowHandles = await browser.getWindowHandles();
@@ -65,5 +79,109 @@ export default class Page {
                 await browser.closeWindow();
             }
         }
+    }
+
+    /** todo Sync
+     *
+     *
+     *
+     *
+     *
+     */
+    syncDisplayTill(selector) {
+        browser.waitUntil(() => $(selector).isDisplayedInViewport(), {
+            timeout: 20000,
+            interval: 1500,
+            timeoutMsg:
+                " '" +
+                selector +
+                "' this element doesnt appear in displayPort waitUntill Command",
+        });
+    }
+    syncWaitExistAndClick(selector) {
+        try {
+            selector.waitForExist();
+            selector.scrollIntoView();
+            selector.waitForClickable();
+            selector.click();
+        }
+        catch (e){
+
+            console.log(e);
+            console.log("Catch syncWaitExistAndClick JS executor ");
+            browser.execute('arguments[0].click();', selector);
+        }
+
+    }
+
+
+    //TODO JSON
+
+    syncJSonUpdate(jsonFile, object) {
+        let response = fs.readFileSync(jsonFile, 'utf8');
+        let parsed = JSON.parse(response); //now it an object
+
+        parsed = { ...parsed, ...object };
+        let json = JSON.stringify(parsed); //convert it back to json
+        fs.writeFileSync(jsonFile, json); // write it back
+        console.log(json);
+    }
+
+    async syncJsonRead(jsonFile) {
+
+
+        try {
+            const packageObj = await fsextra.readJson(jsonFile)
+            console.log(packageObj) // => 0.1.3
+            return packageObj;
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+
+
+    async syncWriteYaml(testYmlPath,object){
+
+        const raw =   fs.readFileSync(testYmlPath);
+        const data =  YAML.safeLoad(raw);
+        // Show the YAML
+
+        // Modify the YAML
+        // let getYamlvalue =  path.Order_data.order_id;  // Dorothy
+        // Saved the YAML
+        const yaml =  YAML.safeDump(object);
+        console.log(data);
+        await fs.writeFileSync(testYmlPath, yaml);
+    }
+    async syncWriteYaml2(testYmlPath,object){
+
+        const raw =   fs.readFileSync(testYmlPath);
+        const data =  YAML.safeLoad(raw);
+        // Show the YAML
+
+        // Modify the YAML
+        // let getYamlvalue =  path.Order_data.order_id;  // Dorothy
+        // Saved the YAML
+        const yaml =  YAML.safeDump(object);
+        console.log(data);
+        await fs.appendFileSync(testYmlPath, yaml);
+    }
+
+
+    //READER HELPER
+    getTitleURL() {
+        return {
+            url: browser.getUrl(),
+            title: browser.getTitle(),
+        };
+    }
+    SplitNumbers(value): number {
+        let splitter: number = value
+            .match(/\d+/g)
+            .map(Number)
+            .join();
+        console.log(splitter);
+        return splitter;
     }
 }

@@ -1,12 +1,9 @@
-// import homepage from '../pages/Homepage';
-import OrderPage from '../pages/OrderPage';
 import { Given } from 'cucumber';
 import { When } from 'cucumber';
 import { Then } from 'cucumber';
 import homepage from '../pages/Homepage';
 import orderPage from '../pages/OrderPage';
-
-
+import orderSyncPage from '../pages/OrderSyncPage';
 
 Then(/^User click on add pet$/, async () => {
     await homepage.addNewBtnasync();
@@ -22,8 +19,8 @@ Then(/^User select "([^"]*)" Specy and breed$/, text => {
 When(/^Then User go to next step$/, async () => {
     await orderPage.clickNext();
 });
-Then(/^User upload face image$/, async () => {
-    await orderPage.selectImageFace();
+Then(/^User upload face image$/,  () => {
+     orderPage.selectImageFace();
 });
 Then(/^User select "([^"]*)" of both eyes$/, async text => {
     await orderPage.selectEyeColour(text);
@@ -61,6 +58,42 @@ When(/^User click on finish checkout$/, async () => {
 Then(/^User verify the item in cart$/, async () => {
     await orderPage.verifyCartItem();
 });
-When(/^User proceed to checkout$/, function() {
-
+When(/^User proceed to checkout$/, async () => {
+    await orderPage.proceedCheckBtn();
+});
+Then(/^User is able to view Order Summary$/, async function() {
+    await orderPage.orderTitle();
+});
+Then(/^User use a Debit new method for payment$/, async function() {
+    await orderPage.clickUseNewMethod();
+});
+Then(/^User Enter "([^"]*)" Card Number$/, async function(text) {
+    await orderPage.EnterValueCard(text);
+});
+Then(/^User Enter "([^"]*)" Expiry Date$/, async function(text) {
+    await orderPage.EnterValueExpire(text);
+});
+Then(/^User Enter "([^"]*)" CVC$/, async function(text) {
+    await orderPage.EnterValueCVC(text);
+});
+When(/^User accept Discrete packaging$/, function() {
+    orderSyncPage.clickDiscretePacging();
+});
+When(/^User Place the Order$/, function() {
+    orderSyncPage.clickPlaceOrder();
+});
+Then(/^User Verify the successful message of Order$/, function() {
+    orderSyncPage.verifyOrderPlaced();
+});
+Then(/^User Close the Order After Verification$/, function() {
+    orderSyncPage.closeTheOrderMessage();
+});
+Then(/^User select size of "([^"]*)" slipper$/, function(text) {
+    orderSyncPage.selectSlipperSize(text);
+});
+Then(/^User get the Order ID$/, function() {
+    orderSyncPage.getOrderID();
+});
+Then(/^User Save the Order ID$/, function() {
+    orderSyncPage.saveOrderToJson();
 });

@@ -1,13 +1,18 @@
 import Page from 'src/pages/Page';
+
 const yaml = require('js-yaml');
 const fs = require('fs');
 const path = require('path');
-import { expect } from 'chai';
+import { ElementOrder, ElementCheckout } from 'src/pages/elements/Elements';
 
 // const image = fs.readFileSync('../Data/Images')
 let orderValue = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/Order.yml', 'utf8')
 );
+let paymentValue = yaml.safeLoad(
+    fs.readFileSync('./src/Data/Yaml/Payment.yml', 'utf8')
+);
+let testvalue = './src/Data/Yaml/test.yml';
 
 class OrderPage extends Page {
     get petNameElem() {
@@ -27,24 +32,26 @@ class OrderPage extends Page {
     }
 
     async setPetNameasync(value) {
-        let modal = await $("//div[@class='add_pet_contain']//h5");
-        let add_petelem = await $('#new_pets_name');
+        let modal = await $(ElementOrder.modal);
+        let add_petelem = await $(ElementOrder.add_pet);
         await modal.waitForDisplayed();
         let petPlaceholder = await add_petelem.getAttribute('placeholder');
         console.log(petPlaceholder);
         await browser.waitUntil(
-            () => petPlaceholder === "Enter Your Pet's Name...",  {
+            () => petPlaceholder === "Enter Your Pet's Name...",
+            {
                 timeout: 5000,
-                timeoutMsg: 'expected text to be different after 5s'
-            });
+                timeoutMsg: 'expected text to be different after 5s',
+            }
+        );
         let pet_name = await orderValue[value]['name'];
         await add_petelem.waitForClickable();
+        await browser.pause(3000);
         await add_petelem.addValue(pet_name);
-
     }
 
     setPetName(value) {
-        let modal = $("//div[@class='add_pet_contain']//h5");
+        let modal = $(ElementOrder.modal);
         modal.waitForExist();
         let valuemodal = modal.getText();
         console.log(valuemodal);
@@ -63,54 +70,77 @@ class OrderPage extends Page {
     }
 
     async clickNext() {
-        let nxtBtn = await $("//div[contains(text(),'Next Step')]");
+        let nxtBtn = await $(ElementOrder.nxtBtn);
 
         await super.waitAndclick(nxtBtn);
-        await browser.pause(50000);
     }
 
     async setasyncpet(value) {
         let pet_species = await orderValue[value]['species'];
         let pet_breed = await orderValue[value]['breed'];
-        let specyelem = await $('#new_pets_species');
-        let breedelem = await $('#new_pets_breed');
+        let specyelem = await $(ElementOrder.specyelem);
+        let breedelem = await $(ElementOrder.breedelem);
         await specyelem.selectByVisibleText(pet_species);
         await breedelem.waitForDisplayed();
         await breedelem.selectByVisibleText(pet_breed);
     }
 
-    async selectImageFace() {
-        let uploadFaceImage = await $(
-            "//body[@class='page-template page-template-template-add_edit-pet_profile page-template-template-add_edit-pet_profile-php page page-id-388 logged-in wp-custom-logo wp-embed-responsive theme-CuddleCloneTheme woocommerce-js has_paypal_express_checkout group-blog elementor-default jdgm--leex-script-loaded']/input[1]"
+     selectImageFace() {
+        let uploadFaceImage =  $('//body/input[1]');
+
+        let elemShow =  $(
+            "//div[@class='photo_uploads section']//div[@class='left_side']//label"
         );
-        await browser.pause(3000);
-        let uploadbtn = await $("//div[@class='photo_uploads section']//div[@class='left_side']//label");
-        let uploadValue = await uploadbtn.getText();
-        await browser.waitUntil(
-            () =>
-              uploadValue === "Upload Pet's Photos", {
-            timeout: 5000,
-            timeoutMsg: 'expected text to be different after 5s'
+         elemShow.isDisplayedInViewport();
+        let text =  elemShow.getText();
+        console.log(text);
+         let getTitle =  browser.getUrl();
+         let splitter = getTitle.match(/\d+/g).map(Number).join();
+         console.log(splitter);
+         this.petIdGlobal = Number(splitter);
+         browser.waitUntil(() => text === "Upload Pet's Photos", {
+            timeout: 50000,
+            timeoutMsg: 'expected text to be different after 5s',
         });
-           
-        await browser.execute(
+         expect(text).toContain("Upload Pet");
+         browser.pause(3000);
+
+        // await browser.execute(
+        //     // assign style to elem in the browser
+        //     (el)=> (
+        //         (el.style.visibility = 'visible'),
+        //         (el.style.position = 'absolute'),
+        //         (el.style.top = '100px'),
+        //         (el.style.left = '0px')
+        //     ),
+        //     // pass in element so we don't need to query it again in the browser
+        //     $("//body/input[1]")
+        // );
+         browser.execute(
             // assign style to elem in the browser
             el => (
                 (el.style.top = '100px'),
-                (el.style.left = '100px'),
+                (el.style.position = 'absolute'),
                 (el.style.width = '100px'),
                 (el.style.height = '100px'),
                 (el.style.visibility = 'visible'),
                 (el.style.display = 'block')
             ),
+
             // pass in element so we don't need to query it again in the browser
-            uploadFaceImage
+             $('//body/input[1]')
         );
+
+         uploadFaceImage.waitForDisplayed();
 
         const relativepath = './src/Data/Images/Dog/face.jpeg';
         const filePath = path.join(process.cwd(), relativepath);
-        await uploadFaceImage.setValue(filePath);
-    }
+         browser.pause(1500);
+        const val = browser.uploadFile(filePath);
+        uploadFaceImage.setValue(val);
+         browser.pause(1500);
+
+     }
 
     /*----------------------------------------------------------------
 
@@ -124,32 +154,35 @@ class OrderPage extends Page {
         );
         await elementEyeColour.scrollIntoView();
         await super.waitAndclick(elementEyeColour);
+        console.log("eyeee");
     }
     async selectEarPairs() {
-        let leftEar = await $(
-            "//div[contains(@class,'ear_positions section')]//div[contains(@class,'left_column')]//div[1]"
-        );
-        let RightEar = await $(
-            "//div[contains(@class,'ear_positions section')]//div[contains(@class,'right_column')]//div[1]"
-        );
-        await super.waitAndclick(leftEar);
-        await super.waitAndclick(RightEar);
+        let leftEar = await $(ElementOrder.leftEar);
+        let RightEar = await $(ElementOrder.RightEar);
+        await browser.pause(5000);
+        await console.log("left ear ");
+        await leftEar.scrollIntoView();
+        await leftEar.waitForExist();
+        await leftEar.click();
+        await RightEar.scrollIntoView();
+        await RightEar.waitForExist();
+        await RightEar.click();
+        // await super.waitAndclick(leftEar);
+        // await super.waitAndclick(RightEar);
     }
     async ageSelect(val) {
         let yamlAge = orderValue[val]['age'];
-        let ageElem = await $("//select[@id='age']");
+        let ageElem = await $(ElementOrder.ageElem);
         await ageElem.scrollIntoView();
         await ageElem.selectByVisibleText(yamlAge);
     }
     async clickNextBtn() {
-        let nxtElem = await $("//a[contains(@class,'confirm')]");
+        let nxtElem = await $(ElementOrder.confirmElem);
 
         await super.staticJsClick(nxtElem);
     }
     async clickProductNav() {
-        let productElem = await $(
-            "//li[@class='dropdown menu-large nav-item']//a[@class='dropdown-toggle nav-link']"
-        );
+        let productElem = await $(ElementOrder.productElem);
         await productElem.waitForDisplayed();
         await productElem.click();
     }
@@ -157,66 +190,112 @@ class OrderPage extends Page {
         let itemElem = await $(
             "//li[@class='dropdown-header']/..//li//a[text()=\"" + value + '"]'
         );
-        let dropdownShowElem = await $(
-            "//ul[@class='dropdown-menu megamenu show']"
-        );
+        let dropdownShowElem = await $(ElementOrder.dropdownShowElem);
         await dropdownShowElem.waitForExist();
         await super.waitAndclick(itemElem);
     }
 
     async clickOnGetProductBTN() {
-        let productBtnElem = await $(
-            "//a[@class='get-product-button customize btn-white-arrow']"
-        );
+        let productBtnElem = await $(ElementOrder.productBtnElem);
         await super.waitAndclick(productBtnElem);
     }
     async selectPet() {
-        let headerElem = await $("//div[@class='change_pet']//h5");
-        await browser.waitUntil(
-            () => headerElem.isDisplayed(),
+        // let selectPet = await $(ElementOrder.selectPet);
 
-        );
-        let selectPet = await $("(//div[@class='pet_box']//a//b)[1]");
-        await super.waitAndclick(selectPet);
+        let selectPet = await $("//div[@id='pet_"+this.petIdGlobal+"']//a//b")
+        await browser.pause(4000);
+        await selectPet.scrollIntoView();
+        await super.waitTillViewPort(selectPet);
+        await selectPet.waitForClickable();
+        await selectPet.click();
     }
     async confirmBtn() {
-        let confirmElem = await $("//a[contains(@class,'confirm')]");
-        await super.displayAndclick(confirmElem);
+        let confirmElem = await $(ElementOrder.confirmElem);
+
+        await super.waitAndclick(confirmElem);
     }
     async clickAddCartBtn() {
-        console.log("doesnt appear");
-        let modalCart = await $(
-            "//div[@class='modal-dialog modal-dialog-centered confirm_order_outer_container']"
-        );
-        await modalCart.waitForExist();
-        let addCartelem = await $('div.add_to_cart_button');
+        let addCartelem = await $(ElementOrder.addCartelem);
+        console.log('doesnt appear');
 
-        await browser.execute(
+        const result = await browser.execute(
             // assign style to elem in the browser
-            el => (
-                (el.style.width = 'inherit')
-            ),
+            el => (el.style.width = 'inherit'),
             // pass in element so we don't need to query it again in the browser
             addCartelem
         );
-        await this.staticWaitAndclick(addCartelem);
-        await browser.waitUntil( () => {
-            return !$("//div[@class='confirm_order_outer']").isDisplayed();
-        }, );
+        await addCartelem.scrollIntoView();
+        await browser.pause(2000);
+        await browser.execute('arguments[0].click();', addCartelem);
+
+        // await this.displayAndclick(addCartelem);
+        // await browser.waitUntil( () => {
+        //     return !$("//div[@class='confirm_order_outer']").isDisplayed();
+        // }, );
     }
     async clickFinishCheckoutBTN() {
-        let finishCheckoutElem = await $("//div[@class='no_thanks drk-btn']");
+        let finishCheckoutElem = await $(ElementOrder.finishCheckoutElem);
+        await browser.pause(2000);
+        finishCheckoutElem.isDisplayedInViewport();
         await browser.execute('arguments[0].click();', finishCheckoutElem);
     }
     async verifyCartItem() {
-        let verifyCartMessage = await $("//div[@class='cart_count']");
+        let verifyCartMessage = await $(ElementOrder.verifyCartMessage);
+        await verifyCartMessage.waitForDisplayed({ timeout: 20000 });
         let cartValue = await verifyCartMessage.getText();
-        await expect(cartValue).to.contains('items in your cart.');
+        await expect(cartValue).toContain('in your cart.');
     }
-    async proceedCheckBtn(){
-        let proceedBtnElem= await $("//a[@class='btn btn-primary btn-lg btn-block']//br")
-        await super.waitAndclick("//a[@class='btn btn-primary btn-lg btn-block']");
+    async proceedCheckBtn() {
+        let proceedBtnElem = await $(ElementOrder.proceedBtnElem);
+        await super.waitAndclick(proceedBtnElem);
+    }
+    async orderTitle() {
+        let orderSummary = await $(ElementCheckout.orderSummary);
+        await this.waitTillViewPort(orderSummary);
+        let orderSummaryText = await orderSummary.getText();
+        await expect(orderSummaryText).toContain('Order Summary');
+    }
+    async clickUseNewMethod() {
+        let useNewMethodElem = await $(ElementCheckout.useNewPaymentMethod);
+        await super.displayAndclick(useNewMethodElem);
+    }
 
+    async EnterValueCard(value) {
+        await browser.pause(7000);
+        let iframe = await $("//iframe[@id='card_number']");
+        await browser.switchToFrame(iframe);
+
+        let cardNum = await $(ElementCheckout.cardElem);
+        await cardNum.waitForExist();
+        let yamlCardNumber = await paymentValue[value]['cardnum'];
+        for (let index = 0; index <= 3; index++) {
+            await browser.pause(1000);
+            await cardNum.addValue(yamlCardNumber);
+            await browser.pause(1500);
+            await cardNum.addValue(yamlCardNumber);
+        }
+        await browser.switchToParentFrame();
+    }
+    async EnterValueExpire(value) {
+        let iframeElem = await $("//iframe[@name='__privateStripeFrame7']");
+        await browser.switchToFrame(iframeElem);
+        let expireDateElem = await $(ElementCheckout.expireDateElem);
+        let yamlCardMonth = await paymentValue[value]['month'];
+        let yamlCardYear = await paymentValue[value]['year'];
+        await expireDateElem.setValue(yamlCardMonth);
+        await browser.pause(1000);
+        await expireDateElem.setValue(yamlCardYear);
+        await browser.switchToParentFrame();
+    }
+    async EnterValueCVC(value) {
+        await browser.pause(1000);
+        let iframeElem = await $("//iframe[@name='__privateStripeFrame8']");
+        await browser.switchToFrame(iframeElem);
+        let cvvNum = await $(ElementCheckout.cvcElem);
+        let yamlCardNumber = await paymentValue[value]['cvc'];
+        await cvvNum.setValue(yamlCardNumber);
+
+        await browser.switchToParentFrame();
     }
 }
 export default new OrderPage();
