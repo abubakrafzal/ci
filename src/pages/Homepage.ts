@@ -64,6 +64,15 @@ class Homepage extends Page {
         await browser.closeWindow();
         await browser.switchToWindow(lastWindowHandle);
     }
+    goToBaseURL(){
+        try {
+            super.syncFirstWindowHandle();
+
+        }
+        catch (e) {
+                console.log(e);
+        }
+    }
 
 }
 

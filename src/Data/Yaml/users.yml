@@ -2,4 +2,9 @@ admin:
   username: eric.littleton@cuddleclones.com
   password: ECZ414196l!
 
+SuperAdmin:
+  username: admin@oms.com
+  password: oms123#
+
+
 

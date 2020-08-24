@@ -7,6 +7,7 @@
         "test": "cross-env NODE_ENV=QA wdio",
         "qa_woo": "npx wdio",
         "tag": "npm run test -- --cucumberOpts.tagExpression=$npm_config_tag",
+        "business": "cross-env NODE_ENV=QA wdio wdio.conf.js --suite BusinessFlow",
         "tag:debug": "npm run test:debug -- --cucumberOpts.tagExpression=$npm_config_tag",
         "test:debug": "cross-env NODE_ENV=QA DEBUG=true wdio",
         "allure-report": "allure generate ./allure-results --clean && allure open"

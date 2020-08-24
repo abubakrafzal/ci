@@ -31,6 +31,7 @@ const { addArgument } = require('@wdio/allure-reporter').default;
 let slack = require('wdio-slack-service');
 const slacker = require('@moroo/wdio-slack-reporter');
 let baseUrl;
+
 if (process.env.NODE_ENV === 'QA') {
     baseUrl = process.env.QA_WooURL;
 } else {
@@ -106,6 +107,16 @@ exports.config = {
         // 'path/to/excluded/files'
         './src/features/homepage-search.feature',
     ],
+    suites: {
+
+        BusinessFlow: [
+            './src/features/Order.feature',
+            './src/features/OMS.feature',
+        ],
+        otherFeature: [
+            // ...
+        ]
+    },
     //
     // ============
     // Capabilities
@@ -316,31 +327,6 @@ exports.config = {
 
         global.assert = chai.should;
         global.should = chai.should();
-        browser.addCommand("getUrlAndTitle", function () {
-            // `this` refers to the `browser` scope
-            return {
-                url: this.getUrl(),
-                title: this.getTitle()
-            };
-        });
-
-        browser.addCommand("waitAndClick", function (selector) {
-            try {
-                selector.waitForExist();
-                selector.click();
-            } catch(Error) {
-                throw new Error("Could not click on selector: " + selector);
-            }
-        });
-
-        browser.addCommand("waitAndSendkeys", function (selector, keys) {
-            try {
-                $(selector).waitForExist();
-                $(selector).setValue(keys);
-            } catch(Error) {
-                throw new Error("Could not send keys: " + $(keys) + ", using selector: " + $(selector));
-            }
-        });
     },
     /**
      * Runs before a WebdriverIO command gets executed.
@@ -373,10 +359,10 @@ exports.config = {
     beforeScenario: function(uri, feature, scenario, sourceLocation) {
         try {
             console.log('TRY Before Scenario');
-            browser.url('/');
 
+            wdioHelper.ScenarioHook();
         } catch (e) {
-            console.log('Catch Before Scenario  s');
+            console.log('Catch Before Scenarios');
             console.log(e.message);
         }
     },
@@ -400,8 +386,10 @@ exports.config = {
      * Runs after a Cucumber scenario
      */
     afterScenario: function(uri, feature, scenario, result, sourceLocation) {
+
         scenarioCounter += 1;
         addArgument('Scenario #', scenarioCounter);
+        wdioHelper.closeTab();
     },
     /**
      * Runs after a Cucumber feature

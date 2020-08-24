@@ -85,7 +85,8 @@ export const ElementAdmin={
     wooCommerceElem : "//div[@class='wp-menu-name'][contains(text(),'WooCommerce')]",
     ordersLiElem : "//a[@class='wp-first-item current']",
     updateButtonElem : "//button[@name='save']",
-
+    orderDateElem: "//input[@name='order_date']",
+    lineItemFirstElem: "//tbody[@id='order_line_items']//td[@class='name']//div[2]",
     /*
     todo
     Billing Admin Elemenet
@@ -96,11 +97,11 @@ export const ElementAdmin={
     billingLastNameElem : "//input[@id='_billing_last_name']",
     billingCompanyElem : "//input[@id='_billing_company']",
     billingAddressLine1Elem : "//input[@id='_billing_address_1']",
-    billingSddressLine2Elem : "//input[@id='_billing_address_2']",
+    billingAddressLine2Elem : "//input[@id='_billing_address_2']",
     billingCityElem : "//input[@id='_billing_city']",
     billingPostcodeZIPElem : "//input[@id='_billing_postcode']",
     billingSelectCountryElem : "//span[@id='select2-_billing_country-container']",
-    billingStateCountyElem : "//input[@id='_billing_state']",
+    billingStateCountryElem : "//span[@id='select2-_billing_state-container']",
     billingEmailAddressElem : "//input[@id='_billing_email']",
     billingPhoneElem : "//input[@id='_billing_phone']",
     billingDebitCreditAffirElem : "//select[@id='_payment_method']",
@@ -121,8 +122,77 @@ Shipping ELement WPADMIN
     shippingCityElem : "//input[@id='_shipping_city']",
     shippingPostcodeZIPElem : "//input[@id='_shipping_postcode']",
     shippingSelectCountryElem : "//span[@id='select2-_shipping_country-container']",
-    shippingStateCountyElem : "//input[@id='_shipping_state']",
+    shippingStateCountyElem : "//span[@id='select2-_shipping_state-container']",
     shippingCustomerProvidedNoteElem : "//textarea[@id='excerpt']",
 
+//finished
+
+
+    orderOMSItemStatus:"//tbody[@id='order_line_items']/tr[1]//table[@class='display_meta']//th[.='Item Status (OMS):']//following-sibling::td",
+    orderWooItemStatus:"//tbody[@id='order_line_items']/tr[1]//table[@class='display_meta']//th[.='Item Status (Woocommerce):']//following-sibling::td",
+    rushOMSItemStatus:"//tbody[@id='order_line_items']/tr[2]//table[@class='display_meta']//th[.='Item Status (OMS):']//following-sibling::td",
+    rushWooItemStatus:"//tbody[@id='order_line_items']/tr[2]//table[@class='display_meta']//th[.='Item Status (Woocommerce):']//following-sibling::td",
+    rushDeliveryDuration:"/html//tbody[@id='order_line_items']/tr[2]/td[@class='name']/div[4]",
 
 }
+export const ElementOMSHome = {
+    headingElem: "//div[@id='login']//h2",
+
+    usernameElem : "//input[@id='employee_email']",
+    passwordElem : "//input[@id='employee_password']",
+    rememberMeElem : "//input[@id='employee_remember_me']",
+    submitElem : "//input[@name='commit']",
+    pageTitleElem: "//h2[@id='page_title']",
+    orderPanelElem :"//li[@id='orders']//a",
+
+    dashboardElem : "//li[@id='dashboard']//a",
+    employeesElem : "//li[@id='employees']//a",
+    holidaysElem : "//li[@id='holidays']//a",
+    importProductsElem : "//li[@id='import_products']//a",
+    lineItemsElem : "//li[@id='line_items']//a",
+    productsElem : "//li[@id='products']//a",
+    shipStationOrdersElem : "//li[@id='shipstation_orders']//a",
+    statusMappingsElem : "//li[@id='status_mappings']//a",
+
+    orderNumberElem : "//input[@id='order_id']",
+
+};
+
+export const ElementOMSOrder = {
+    firstNameElem : "//input[@id='order_customer_attributes_first_name']",
+    lastNameElem : "//input[@id='order_customer_attributes_last_name']",
+    shippingNotesElem : "//textarea[@id='order_shipping_notes']",
+    orderDateElem : "//input[@id='order_date_created']",
+    orderStatusElem : "//input[@id='order_status']",
+    paymentViaElem : "//input[@id='order_payment_method']",
+    rushElem : "//select[@id='order_rush']",
+    discreetPackagingElem : "//label[contains(text(),'Discreet packaging')]",
+    lineItemFirstElem : "(//td[@class='col col-item_number']//a)[1]",
+
+    billingBarElem : "//a[contains(text(),'Billing Address')]",
+    billingfirstNameElem : "//input[@id='order_billing_address_attributes_first_name']",
+    billinglastNameElem : "//input[@id='order_billing_address_attributes_last_name']",
+    billingAddress1Elem : "//input[@id='order_billing_address_attributes_address_1']",
+    billingAddress2Elem : "//input[@id='order_billing_address_attributes_address_2']",
+    billingcountryElem : "//input[@id='order_billing_address_attributes_country']",
+    billingstateElem : "//input[@id='order_billing_address_attributes_state']",
+    billingemailElem : "//input[@id='order_billing_address_attributes_email']",
+    billingcityElem : "//input[@id='order_billing_address_attributes_city']",
+    billingpostcodeElem : "//input[@id='order_billing_address_attributes_postcode']",
+    billingphoneElem : "//input[@id='order_billing_address_attributes_phone']",
+    billingphoneTwilioElem : "//input[@id='order_billing_address_attributes_phone_twilio']",
+
+    shippingBarElem : "//a[contains(text(),'Shipping Address')]",
+    shippingfirstNameElem : "//input[@id='order_shipping_address_attributes_first_name']",
+    shippinglastNameElem : "//input[@id='order_shipping_address_attributes_last_name']",
+    shippingaddress1Elem : "//input[@id='order_shipping_address_attributes_address_1']",
+    shippingaddress2Elem : "//input[@id='order_shipping_address_attributes_address_2']",
+    shippingcountryElem : "//input[@id='order_shipping_address_attributes_country']",
+    shippingstateElem : "//input[@id='order_shipping_address_attributes_state']",
+    shippingcityElem : "//input[@id='order_shipping_address_attributes_city']",
+    shippingpostcodeElem : "//input[@id='order_shipping_address_attributes_postcode']",
+
+
+};
+
+

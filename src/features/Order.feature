@@ -47,9 +47,8 @@ Feature: TS 1 WOO: Place the order of Different Plush Products
     Examples:
              | Payment     |
              | Debit       |
-
   @Smoke @Add_to_cart @regression @Add_slipper
-  Scenario Outline: Add a Plush Slipper Productx
+  Scenario Outline: Add a Plush Slipper Product
     Given User is on HomePage
     When  User go to product
     And   User click on "Slippers" item category
@@ -77,14 +76,36 @@ Feature: TS 1 WOO: Place the order of Different Plush Products
     And   User go to orders list
     Then  User go to order "<Order>" details
     And   User hit the Update Button
-    When  User Edit the Billing Data
-    Then  User get the Values of Shipping and Billing
+    When  User go to Edit the Billing Data
+    Then  User get the Values of Billing
     Then  Dump all the data to the YamlFile
 
 
     Examples:
-         | Payment     |  Pet       | Order       |
-         | Debit       |  Pet_dog   | Order_data  |
+      | Payment     |  Pet       | Order       |
+      | Debit       |  Pet_dog   | Order_data  |
+
+
+  @Smoke @Add_to_cart @regression @WooCommerce
+  Scenario Outline: Get data from  Woocommerce Admin Website
+
+    Given Super User go to Admin Site
+    When  User click On Wocommerce from side panel
+    And   User go to orders list
+    Then  User go to order "<Order>" details
+    And   User hit the Update Button
+    When  User go to Edit the Billing Data
+    Then  User get the Values of Billing
+    Then  User go to Edit the Shipping Data
+    And   User get the Values of Shipping
+    Then  User get the values of Item
+    Then  Dump all the data to the YamlFile
+    Then  Close All the tabs except Base
+
+
+    Examples:
+             | Order       |
+             | Order_data  |
 
 
 

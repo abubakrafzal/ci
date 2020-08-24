@@ -5,7 +5,7 @@ const yaml = require('js-yaml');
 const YAML = require('js-yaml');
 
 const fs = require('fs');
-const fsextra= require('fs-extra');
+const fsextra = require('fs-extra');
 export default class Page {
     public orderIdGlobal: number;
     public petIdGlobal: number;
@@ -98,22 +98,54 @@ export default class Page {
                 "' this element doesnt appear in displayPort waitUntill Command",
         });
     }
+
     syncWaitExistAndClick(selector) {
         try {
             selector.waitForExist();
             selector.scrollIntoView();
             selector.waitForClickable();
             selector.click();
-        }
-        catch (e){
-
+        } catch (e) {
             console.log(e);
-            console.log("Catch syncWaitExistAndClick JS executor ");
+            console.log('Catch syncWaitExistAndClick JS executor ');
             browser.execute('arguments[0].click();', selector);
         }
-
+    }
+    syncWaitExistAndEnter(selector, value) {
+        try {
+            selector.waitForExist();
+            selector.scrollIntoView();
+            selector.waitForClickable();
+            selector.setValue(value);
+        } catch (e) {
+            console.log(e);
+            console.log('Catch syncWaitExistAndClick JS executor ');
+            browser.execute(
+                "arguments[0].setAttribute('value','" + value + "')",
+                selector
+            );
+        }
+    }
+    syncVerifyContainElem(selector, actualValue, expectedValue) {
+        selector.waitForExist();
+        selector.scrollIntoView();
+        selector.waitForDisplayed();
+        console.log('$ Selector'+selector+'Actual value' +actualValue+'Expected value'+expectedValue);
+        expect(actualValue).toContain(expectedValue);
     }
 
+    syncFirstWindowHandle() {
+        const windowHandles = browser.getWindowHandles();
+
+        // Close all tabs but the first one
+        windowHandles.reverse();
+        windowHandles.forEach((handle, index) => {
+            browser.switchToWindow(handle);
+            if (index < windowHandles.length - 1) {
+                browser.closeWindow();
+            }
+        });
+    }
 
     //TODO JSON
 
@@ -126,48 +158,50 @@ export default class Page {
         fs.writeFileSync(jsonFile, json); // write it back
         console.log(json);
     }
-
-    async syncJsonRead(jsonFile) {
-
-
+    syncJsonRead(jsonFile) {
+        let response = fs.readFileSync(jsonFile, 'utf8');
+        //now it an object
+        return JSON.parse(response);
+    }
+    async asyncJsonRead(jsonFile) {
         try {
-            const packageObj = await fsextra.readJson(jsonFile)
-            console.log(packageObj) // => 0.1.3
+            const packageObj = await fsextra.readJson(jsonFile);
+            console.log(packageObj); // => 0.1.3
             return packageObj;
         } catch (err) {
-            console.error(err)
+            console.error(err);
         }
     }
 
-
-
-    async syncWriteYaml(testYmlPath,object){
-
-        const raw =   fs.readFileSync(testYmlPath);
-        const data =  YAML.safeLoad(raw);
+    async syncWriteYaml(testYmlPath, object) {
+        const raw = fs.readFileSync(testYmlPath);
+        const data = YAML.safeLoad(raw);
         // Show the YAML
 
         // Modify the YAML
         // let getYamlvalue =  path.Order_data.order_id;  // Dorothy
         // Saved the YAML
-        const yaml =  YAML.safeDump(object);
+        const yaml = YAML.safeDump(object, {
+            styles: {
+                '!!omap': 'canonical', // dump null as ~
+            },
+            sortKeys: true, // sort object keys
+        });
         console.log(data);
         await fs.writeFileSync(testYmlPath, yaml);
     }
-    async syncWriteYaml2(testYmlPath,object){
-
-        const raw =   fs.readFileSync(testYmlPath);
-        const data =  YAML.safeLoad(raw);
+    async syncWriteYaml2(testYmlPath, object) {
+        const raw = fs.readFileSync(testYmlPath);
+        const data = YAML.safeLoad(raw);
         // Show the YAML
 
         // Modify the YAML
         // let getYamlvalue =  path.Order_data.order_id;  // Dorothy
         // Saved the YAML
-        const yaml =  YAML.safeDump(object);
+        const yaml = YAML.safeDump(object);
         console.log(data);
         await fs.appendFileSync(testYmlPath, yaml);
     }
-
 
     //READER HELPER
     getTitleURL() {

@@ -12,7 +12,7 @@ let orderValue = yaml.safeLoad(
 let paymentValue = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/Payment.yml', 'utf8')
 );
-let testvalue = './src/Data/Yaml/test.yml';
+let testvalue = './src/Data/Yaml/OMSData.yml';
 
 class OrderPage extends Page {
     get petNameElem() {
@@ -201,8 +201,9 @@ class OrderPage extends Page {
     }
     async selectPet() {
         // let selectPet = await $(ElementOrder.selectPet);
+        let petId = await orderValue["pet_id"];
 
-        let selectPet = await $("//div[@id='pet_"+this.petIdGlobal+"']//a//b")
+        let selectPet = await $("//div[@id='pet_"+petId+"']//a//b")
         await browser.pause(4000);
         await selectPet.scrollIntoView();
         await super.waitTillViewPort(selectPet);
