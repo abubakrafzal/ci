@@ -99,6 +99,20 @@ export default class Page {
         });
     }
 
+    syncWaitExistAndText(selector):string {
+        try {
+            selector.waitForExist();
+            selector.scrollIntoView();
+            if(selector.getText() === ''){
+                return selector.getAttribute("value");
+            }
+            return selector.getText();
+        }
+        catch (e) {
+            console.log("syncWaitExistAndText Error"+selector + e);
+        }
+        
+    }
     syncWaitExistAndClick(selector) {
         try {
             selector.waitForExist();
@@ -160,7 +174,6 @@ export default class Page {
     }
     syncJsonRead(jsonFile) {
         let response = fs.readFileSync(jsonFile, 'utf8');
-        //now it an object
         return JSON.parse(response);
     }
     async asyncJsonRead(jsonFile) {

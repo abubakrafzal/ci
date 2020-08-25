@@ -1,5 +1,5 @@
 
-import homepage from '../pages/Homepage';
+import homepage from '../pages/Woo/Homepage';
 import { Given, When } from 'cucumber';
 import { Then } from 'cucumber'
 

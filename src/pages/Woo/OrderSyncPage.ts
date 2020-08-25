@@ -92,6 +92,7 @@ class OrderSyncPage extends Page {
         super.syncJSonUpdate(jsonOrderPath,data);
     }
 
+
 }
 
 export default new OrderSyncPage();

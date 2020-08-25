@@ -1,7 +1,7 @@
 import { Then } from 'cucumber';
-import adminSyncPage from 'src/pages/AdminSyncPage';
+import adminSyncPage from 'src/pages/Woo/AdminSyncPage';
 import pages from 'src/pages/Page';
-import homepage from 'src/pages/Homepage';
+import homepage from 'src/pages/Woo/Homepage';
 
 
 
@@ -10,4 +10,7 @@ Then(/^Dump all the data to the YamlFile$/, async function() {
 });
 Then(/^Close All the tabs except Base$/, function() {
     homepage.goToBaseURL();
+});
+Then(/^Dump all the data to the Static YamlFile$/, async function() {
+    await adminSyncPage.readOrderJSONAndYAMLWriteStatic();
 });

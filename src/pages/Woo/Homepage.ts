@@ -1,4 +1,4 @@
-import Page from './Page';
+import Page from '../Page';
 import { assert,  should } from 'chai';
 // import { ElementHomePage } from 'src/pages/elements/Elements';
 

@@ -1,5 +1,5 @@
 import { Then } from 'cucumber';
-import omsOrderPage from 'src/pages/OMSOrdersPage';
+import omsOrderPage from 'src/pages/OMS/OMSOrdersPage';
 import { When } from 'cucumber'
 
 

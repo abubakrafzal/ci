@@ -1,7 +1,7 @@
 import { Given } from 'cucumber';
 import { When } from 'cucumber';
 import { Then } from 'cucumber';
-import adminSyncPage from '../pages/AdminSyncPage';
+import adminSyncPage from '../pages/Woo/AdminSyncPage';
 
 Given(/^Super User go to Admin Site$/, function() {
     adminSyncPage.syncWooAdminURL();
@@ -52,4 +52,7 @@ Then(/^User get the Values of Shipping$/, function() {
 });
 Then(/^User get the values of Item$/, function() {
     adminSyncPage.getLineItemValue();
+});
+Then(/^User go to order Static details$/, function() {
+    adminSyncPage.saveOrderAdminJson()
 });

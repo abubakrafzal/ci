@@ -5,17 +5,9 @@ const fs = require('fs');
 import {
     ElementOMSOrder,
 } from 'src/pages/elements/Elements';
-
-// const image = fs.readFileSync('../Data/Images')
-// let orderValue = yaml.safeLoad(
-//     fs.readFileSync('./src/Data/Yaml/Order.yml', 'utf8')
-// );
-// let paymentValue = yaml.safeLoad(
-//     fs.readFileSync('./src/Data/Yaml/Payment.yml', 'utf8')
-// );
-// let testvalue = './src/Data/Yaml/OMSData.yml';
+import { FilePath } from 'src/pages/elements/FilePath';
 let omsValue = yaml.safeLoad(
-    fs.readFileSync('./src/Data/Yaml/OMSData.yml', 'utf8')
+    fs.readFileSync(FilePath.OmsYaml, 'utf8')
 );
 
 class OMSOrdersPage extends Page {

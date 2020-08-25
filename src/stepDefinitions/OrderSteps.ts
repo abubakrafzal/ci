@@ -1,9 +1,9 @@
 import { Given } from 'cucumber';
 import { When } from 'cucumber';
 import { Then } from 'cucumber';
-import homepage from '../pages/Homepage';
-import orderPage from '../pages/OrderPage';
-import orderSyncPage from '../pages/OrderSyncPage';
+import homepage from '../pages/Woo/Homepage';
+import orderPage from '../pages/Woo/OrderPage';
+import orderSyncPage from '../pages/Woo/OrderSyncPage';
 
 Then(/^User click on add pet$/, async () => {
     await homepage.addNewBtnasync();

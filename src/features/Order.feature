@@ -102,7 +102,6 @@ Feature: TS 1 WOO: Place the order of Different Plush Products
     Then  Dump all the data to the YamlFile
     Then  Close All the tabs except Base
 
-
     Examples:
              | Order       |
              | Order_data  |

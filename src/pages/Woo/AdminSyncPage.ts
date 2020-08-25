@@ -10,6 +10,7 @@ import {
     ElementCheckout,
     ElementAdmin,
 } from 'src/pages/elements/Elements';
+import { FilePath } from 'src/pages/elements/FilePath';
 
 // const image = fs.readFileSync('../Data/Images')
 let orderValue = yaml.safeLoad(
@@ -22,7 +23,11 @@ let paymentValue = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/Payment.yml', 'utf8')
 );
 let jsonOrderPath = './src/Data/Json/OrderData.json';
+let OmsData = './src/Data/Json/OmsData.json';
+
 let testYmlPath = './src/Data/Yaml/OMSData.yml';
+let staticYmlPath = './src/Data/Yaml/StaticOms.yml';
+
 class AdminSyncPage extends Page {
     syncWooAdminURL() {
         try {
@@ -225,14 +230,29 @@ class AdminSyncPage extends Page {
 
 
 
+    saveOrderAdminJson(){
+       let orderStatic = $("//tr[1]//td[1]//a[2]//strong[1]");
+       orderStatic.waitForExist();
+        orderStatic.scrollIntoView();
+        orderStatic.waitForClickable();
+       browser.pause(2000);
+       let orderStaticValue= orderStatic.getText();
+        orderStatic.click();
 
+        let value = this.SplitNumbers(orderStaticValue);
+       let data = {order_num:value};
+        super.syncJSonUpdate(jsonOrderPath,data);
+    }
 
     async readOrderJSONAndYAMLWrite(){
         let parsed = await super.syncJsonRead(jsonOrderPath)
         let obj = {OrderData:parsed}
         await super.syncWriteYaml(testYmlPath, obj);
-        let reader = testValue['OrderData']['first_name'];
-        console.log("reader"+reader);
+    }
+    async readOrderJSONAndYAMLWriteStatic(){
+        let parsed = await super.syncJsonRead(jsonOrderPath)
+        let obj = {OrderData:parsed}
+        await super.syncWriteYaml(staticYmlPath, obj);
     }
 
 
