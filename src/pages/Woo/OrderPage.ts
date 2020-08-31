@@ -217,7 +217,6 @@ class OrderPage extends Page {
     }
     async clickAddCartBtn() {
         let addCartelem = await $(ElementOrder.addCartelem);
-        console.log('doesnt appear');
 
         const result = await browser.execute(
             // assign style to elem in the browser
@@ -239,6 +238,12 @@ class OrderPage extends Page {
         await browser.pause(2000);
         finishCheckoutElem.isDisplayedInViewport();
         await browser.execute('arguments[0].click();', finishCheckoutElem);
+    }
+    async clickContinueShoppingBTN() {
+        let continueShoppingElem = await $(ElementOrder.continueShoppingElem);
+        await browser.pause(2000);
+        continueShoppingElem.isDisplayedInViewport();
+        await browser.execute('arguments[0].click();', continueShoppingElem);
     }
     async verifyCartItem() {
         let verifyCartMessage = await $(ElementOrder.verifyCartMessage);
@@ -298,5 +303,7 @@ class OrderPage extends Page {
 
         await browser.switchToParentFrame();
     }
+
+
 }
 export default new OrderPage();

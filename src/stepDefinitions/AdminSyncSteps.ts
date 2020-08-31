@@ -56,3 +56,12 @@ Then(/^User get the values of Item$/, function() {
 Then(/^User go to order Static details$/, function() {
     adminSyncPage.saveOrderAdminJson()
 });
+Then(/^User go to order number (.*) details$/, function(text) {
+    adminSyncPage.saveOrderAdminJson2(text)
+});
+When(/^Verify OMS "([^"]*)" from WooCommerce$/, function(text) {
+    adminSyncPage.getWooItemStatus(text);
+});
+Then(/^Verify WooAdmin "([^"]*)" from WooCommerce$/, function(text) {
+    adminSyncPage.getWooItemStatus(text);
+});

@@ -43,6 +43,8 @@ export const ElementOrder = {
 
     finishCheckoutElem: "//div[@class='no_thanks drk-btn']",
 
+    continueShoppingElem: "//div[@class='no_thanks_container']//a",
+
     verifyCartMessage: "//div[@class='cart_count']",
 
     proceedBtnElem: "//a[@class='btn btn-primary btn-lg btn-block']",
@@ -52,6 +54,8 @@ export const ElementOrder = {
     slipperSizeElem: "//select[@id='attribute_pa_size']",
 
     orderIdElem: "//div[@id='orderStatus']//h4//b",
+
+    orderUploadLabel: "//div[@class='upload-label']",
 };
 export const ElementCheckout = {
     orderSummary: "//h3[@id='order_review_heading']",
@@ -86,7 +90,7 @@ export const ElementAdmin={
     ordersLiElem : "//a[@class='wp-first-item current']",
     updateButtonElem : "//button[@name='save']",
     orderDateElem: "//input[@name='order_date']",
-    lineItemFirstElem: "//tbody[@id='order_line_items']//td[@class='name']//div[2]",
+    lineItemFirstElem: "(//strong[contains(text(),'Item Number:')]/..)[1]",
     /*
     todo
     Billing Admin Elemenet
@@ -106,6 +110,8 @@ export const ElementAdmin={
     billingPhoneElem : "//input[@id='_billing_phone']",
     billingDebitCreditAffirElem : "//select[@id='_payment_method']",
     billingTransactionIDElem : "//input[@id='_transaction_id']",
+
+    refundAmount:"//td[@class='total refunded-total']//span[@class='woocommerce-Price-amount amount']",
 /*
 Todo
 
@@ -133,7 +139,6 @@ Shipping ELement WPADMIN
     rushOMSItemStatus:"//tbody[@id='order_line_items']/tr[2]//table[@class='display_meta']//th[.='Item Status (OMS):']//following-sibling::td",
     rushWooItemStatus:"//tbody[@id='order_line_items']/tr[2]//table[@class='display_meta']//th[.='Item Status (Woocommerce):']//following-sibling::td",
     rushDeliveryDuration:"/html//tbody[@id='order_line_items']/tr[2]/td[@class='name']/div[4]",
-
 }
 export const ElementOMSHome = {
     headingElem: "//div[@id='login']//h2",
@@ -191,12 +196,17 @@ export const ElementOMSOrder = {
     shippingstateElem : "//input[@id='order_shipping_address_attributes_state']",
     shippingcityElem : "//input[@id='order_shipping_address_attributes_city']",
     shippingpostcodeElem : "//input[@id='order_shipping_address_attributes_postcode']",
+    rushSelectOrderElem: "//select[@id='order_rush']",
+
+    orderSuccessAlertElem: "//div[@class='flash flash_notice']",
+    orderSuccessMessageExpected : "Order updated successfully",
 
 
 };
 export const ElementOMSLineItem = {
 
     lineItemStatusElem : "//span[@id='select2-line_item_slug-container']",
+    lineItemStatusInputElem:"//input[@class='select2-search__field']",
     lineorderNumberElem : "//input[@id='line_item_order_id']",
     lineitemNumberElem : "//input[@id='line_item_id']",
     lineassigendUserElem: "//span[@id='select2-line_item_employee_id-container']",
@@ -240,6 +250,29 @@ export const ElementOMSLineItem = {
     linerequestBuilderElem : "//a[@id='ui-id-26']",
     linenewElem : "//div[@id='notifications']//a[contains(text(),'New')]",
     lineRemakesElem : "//a[@id='ui-id-27']",
+    lineGetOrderElem:"//a[@class='order-number-link']",
+    SuccessAlert:"//div[@class='flash flash_notice']",
+
+    lineFulfillmentDates:"//a[@id='ui-id-3']",
+    lineRushWeeks:"//span[@id='select2-line_item_order_attributes_rush-container']",
+    lineRequestBuilder:"//a[contains(text(),'Request Builder')]",
+    newRequestElem : "//div[@id='notifications']//a[contains(text(),'New')]",
+    customMessageElem : "//label[contains(text(),'Custom message')]",
+    textElem : "//textarea[@id='notification_text']",
+    createBtnElem : "//input[@name='commit']",
+    requestBuilderSuccessfulElem : "//div[@class='flash flash_notice']",
+    sendEmailElem : "//a[@id='send-email-button']",
+
+    //todo refund
+    lineRefundOrderElem: "//a[contains(text(),'New Refund')]",
+    lineReasonOrderElem: "//input[@id='refund_reason']",
+    lineAmountOrderElem: "//input[@id='refund_amount']",
+    lineCreateRefundBtn: "//input[@name='commit']",
+    lineRefundTotalAmount: "//p[@class='inline-hints']",
+    lineRefundNavBtn:"//a[contains(text(),'Add Refund')]",
+
+
+
 };
 
 export const ElementOMSEmploye = {

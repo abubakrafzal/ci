@@ -8,6 +8,9 @@ Pet_dog:
 
 pet_id: 281247
 Success: Your Order Was Successfully Placed!
+Custom Message: Automated Message Please Provide clear face pic
 Order_data:
   order_id: 532835
   first_name: TestName
+
+

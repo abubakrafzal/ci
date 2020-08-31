@@ -47,7 +47,7 @@ const capabilities = debug
               // maxInstances can get overwritten per capability. So if you have an in-house Selenium
               // grid with only 5 firefox instances available you can make sure that not more than
               // 5 instances get started at a time.
-              maxInstances: 2,
+              maxInstances: 1,
               //
               browserName: 'chrome',
               // If outputDir is provided WebdriverIO can capture driver session logs
@@ -112,6 +112,10 @@ exports.config = {
         BusinessFlow: [
             './src/features/Order.feature',
             './src/features/OMS.feature',
+            './src/features/OMSDueDates.feature',
+            './src/features/OMSRefund.feature',
+            './src/features/OMSUpdateData.feature',
+
         ],
         otherFeature: [
             // ...
@@ -177,7 +181,7 @@ exports.config = {
     baseUrl: baseUrl,
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 20000,
+    waitforTimeout: 30000,
     waitforInterval:1000,
     //
     // Default timeout in milliseconds for request
@@ -192,7 +196,19 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: [
-        ['selenium-standalone'],
+        ['selenium-standalone',{
+            logPath: 'logs',
+            installArgs: {
+                drivers: {
+                    chrome: { version: '85.0.4183.83' },
+                }
+            },
+            args: {
+                drivers: {
+                    chrome: { version: '85.0.4183.83' },
+                }
+            },
+        }],
         [
             slack,
             {

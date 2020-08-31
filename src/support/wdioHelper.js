@@ -11,7 +11,8 @@ module.exports.add = () => {
         if (process.env.NODE_ENV === 'QA') {
             browser.pause(3000);
             let closeTab = $("//div[@class='cf-cta-close']");
-            closeTab.waitForDisplayed();
+            let banner= $("//div[@id='section338959-first-overlay']");
+            banner.waitForDisplayed();
             closeTab.click();
         } else if (process.env.NODE_ENV === 'PROD') {
             console.log('*********************');
@@ -20,7 +21,7 @@ module.exports.add = () => {
         } else {
         }
     } catch (e) {
-        console.log('catch');
+        console.log('catch before feature');
         e.message;
     }
 };

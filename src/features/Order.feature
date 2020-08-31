@@ -1,3 +1,4 @@
+@order
 Feature: TS 1 WOO: Place the order of Different Plush Products
   with verification of Pre REQ like ADD PET verify Cart and etc.
 

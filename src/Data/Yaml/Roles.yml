@@ -2,5 +2,209 @@ New Item:
   item_status: New Item
   assignment_group: Plush Manager
   assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+On Hold:
+  item_status: On Hold
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Patterns Assigned:
+  item_status: Patterns Assigned
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+  days: 4
+
+Shaping Assigned:
+  item_status: Shaping Assigned
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Airbrushing Assigned:
+  item_status: Airbrushing Assigned
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+  days: today
+
+Approved:
+  item_status: Approved
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+  date: today
+
+
+Approved with Changes:
+  item_status: Approved with Changes
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+  date: today
+
+Shipped to HQ:
+  item_status: Shipped to HQ
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+  date: today
+
+Shipped:
+  item_status: Shipped
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+  date: today
+
+Ship from china to hq expected:
+  item_status: Ship from china to hq expected
+  no_rush: 37
+  6 Weeks: 34
+  4 Weeks: 33
+  2 Weeks: 6
+
+Ship from hq to customer expected:
+  item_status: Ship from hq to customer expected
+  no_rush: 49
+  6 Weeks: 39
+  4 Weeks: 25
+  2 Weeks: 11
+
+
+QA Review:
+  item_status: QA Review
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Pictures Ready:
+  item_status: Pictures Ready
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Customer Feedback Required:
+  item_status: Customer Feedback Required
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+CSR Follow Up Needed:
+  item_status: CSR Follow Up Needed
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+CSR Call Needed:
+  item_status: CSR Call Needed
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+CSR Refund Needed:
+  item_status: CSR Refund Needed
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Feedback Provided:
+  item_status: Feedback Provided
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: Workshop Designing
+
+Change Outside Workflow:
+  item_status: Change Outside Workflow
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+
+
+Shipped Directly to Customer:
+  item_status: Shipped Directly to Customer
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Arrived to HQ:
+  item_status: Arrived to HQ
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Shipping Hold:
+  item_status: Shipping Hold
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Ready for Shipment:
+  item_status: Ready for Shipment
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+
+Cancelled:
+  item_status: Cancelled
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Returned:
+  item_status: Returned
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Pending Remake:
+  item_status: Pending Remake
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Pending Return:
+  item_status: Pending Return
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+Shipped Back to China:
+  item_status: Shipped Back to China
+  assignment_group: Plush Manager
+  assigned_user: Test  QA 11
+  oms_status: In Progress
+  woo_status: In Progress
+
+
 
 

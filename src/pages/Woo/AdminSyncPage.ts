@@ -1,26 +1,27 @@
 import Page from 'src/pages/Page';
+import { ElementAdmin } from 'src/pages/elements/Elements';
 
 const yaml = require('js-yaml');
 const YAML = require('js-yaml');
 const fs = require('fs');
 const fsextra= require('fs-extra');
 const path = require('path');
-import {
-    ElementOrder,
-    ElementCheckout,
-    ElementAdmin,
-} from 'src/pages/elements/Elements';
-import { FilePath } from 'src/pages/elements/FilePath';
 
 // const image = fs.readFileSync('../Data/Images')
 let orderValue = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/Order.yml', 'utf8')
+);
+let rolesValue = yaml.safeLoad(
+    fs.readFileSync('./src/Data/Yaml/Roles.yml', 'utf8')
 );
 let testValue = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/OMSData.yml', 'utf8')
 );
 let paymentValue = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/Payment.yml', 'utf8')
+);
+let pathValue = yaml.safeLoad(
+    fs.readFileSync('./src/Data/Yaml/paths.yml', 'utf8')
 );
 let jsonOrderPath = './src/Data/Json/OrderData.json';
 let OmsData = './src/Data/Json/OmsData.json';
@@ -32,16 +33,17 @@ class AdminSyncPage extends Page {
     syncWooAdminURL() {
         try {
 
-        browser.newWindow('/wp-admin');
-        let actual = super.getTitleURL();
-        super.syncDisplayTill(ElementAdmin.dashboardElem);
-        expect(actual.title).toContain(ElementAdmin.title);
-        expect(actual.url).toContain(ElementAdmin.url);
+            browser.newWindow('/wp-admin');
+            let actual = super.getTitleURL();
+            super.syncDisplayTill(ElementAdmin.dashboardElem);
+            expect(actual.title).toContain(ElementAdmin.title);
+            expect(actual.url).toContain(ElementAdmin.url);
+
+        } catch (e) {
+            console.log("Wooadmin syncWooAdminURL" + e);
+        }
     }
-    catch (e){
-        console.log("Wooadmin syncWooAdminURL"+ e);
-    }
-    }
+
     clickWooCommerceMenu() {
         let woocommerceElem = $(ElementAdmin.wooCommerceElem);
         woocommerceElem.scrollIntoView();
@@ -55,6 +57,7 @@ class AdminSyncPage extends Page {
         ordersLiElem.click();
     }
     openAppliedOrder(value) {
+        try{
         let jsonOrder = super.syncJsonRead(jsonOrderPath);
         let yamlOrder = jsonOrder['order_num'];
         let selectOrderElem = $(
@@ -62,6 +65,17 @@ class AdminSyncPage extends Page {
         );
         selectOrderElem.waitForClickable();
         selectOrderElem.click();
+        }
+        catch (e){
+            console.log("orderApplied");
+            let order = this.staticOrderIDGlobal;
+            let selectOrderElem = $(
+                "//strong[contains(text(),'" + order + "')]"
+            );
+            selectOrderElem.waitForClickable();
+            selectOrderElem.click();
+
+        }
     }
 
     clickUpdateButton() {
@@ -136,6 +150,9 @@ class AdminSyncPage extends Page {
     getBillingCountryState(){
         let elem = $(ElementAdmin.billingStateCountryElem);
         let elemText = elem.getText();
+        let global = "key" ;
+        let obj:{}={
+        }
         super.syncJSonUpdate(jsonOrderPath,{billing_state: elemText});
 
     }
@@ -222,8 +239,28 @@ class AdminSyncPage extends Page {
     getLineItemValue(){
         let elem = $(ElementAdmin.lineItemFirstElem);
         let elemText = elem.getText();
+
         let LineItemValue = super.SplitNumbers(elemText);
         super.syncJSonUpdate(jsonOrderPath,{line_item: LineItemValue});
+    }
+
+    getOmsItemStatus(value){
+        let yamlValue = rolesValue[value]['oms_status'];
+
+        let elem = $(ElementAdmin.orderOMSItemStatus);
+        let elemText = elem.getText();
+
+        super.syncVerifyContainElem(elem,elemText,yamlValue);
+
+    }
+
+    getWooItemStatus(value){
+        let yamlValue = rolesValue[value]['woo_status'];
+
+        let elem = $(ElementAdmin.orderWooItemStatus);
+        let elemText = elem.getText();
+        super.syncVerifyContainElem(elem,elemText,yamlValue);
+
     }
 
 
@@ -240,8 +277,26 @@ class AdminSyncPage extends Page {
         orderStatic.click();
 
         let value = this.SplitNumbers(orderStaticValue);
-       let data = {order_num:value};
-        super.syncJSonUpdate(jsonOrderPath,data);
+        this.staticOrderIDGlobal = value;
+         console.log("staticOD",this.staticOrderIDGlobal)
+        super.syncJSonUpdate(jsonOrderPath,{order_num:value});
+    }
+
+    saveOrderAdminJson2(text){
+        let yamlValue = pathValue[text]['id'];
+        let orderStatic = $("//tr['"+yamlValue+"']//td[1]//a[2]//strong[1]");
+        orderStatic.waitForExist();
+        orderStatic.scrollIntoView();
+        orderStatic.waitForClickable();
+        browser.pause(2000);
+        let orderStaticValue= orderStatic.getText();
+        orderStatic.click();
+
+        let value = this.SplitNumbers(orderStaticValue);
+        let data = {order_num:value};
+        let yamlValuepath = pathValue[text]['jsonFile'];
+
+        super.syncJSonUpdate(yamlValuepath,data);
     }
 
     async readOrderJSONAndYAMLWrite(){
@@ -253,6 +308,16 @@ class AdminSyncPage extends Page {
         let parsed = await super.syncJsonRead(jsonOrderPath)
         let obj = {OrderData:parsed}
         await super.syncWriteYaml(staticYmlPath, obj);
+    }
+
+    async readJSONAndYAMLWrite(text){
+        let yamlValuePath = pathValue[text]['jsonFile'];
+
+        let yamlValue = pathValue[text]['yamlFile'];
+        super.syncJSonUpdate(yamlValuePath,{test:"Update"});
+        let parsed = await super.syncJsonRead(yamlValuePath)
+        let obj = {OrderData:parsed}
+        await super.syncWriteYaml(yamlValue, obj);
     }
 
 

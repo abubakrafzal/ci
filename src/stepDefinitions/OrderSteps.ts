@@ -97,3 +97,19 @@ Then(/^User get the Order ID$/, function() {
 Then(/^User Save the Order ID$/, function() {
     orderSyncPage.saveOrderToJson();
 });
+Then(/^User apply "([^"]*)" to the item$/, function(text) {
+    orderSyncPage.applyRush(text);
+});
+Then(/^Verify the "([^"]*)"$/, function(value) {
+    orderSyncPage.verifyCustomMessage(value);
+});
+Then(/^User go to accounts details$/, function() {
+    orderSyncPage.userGotoAccounts();
+});
+Then(/^User go to account order details$/, function() {
+    orderSyncPage.openOrderFromRecent();
+
+});
+When(/^User click continue Shopping$/, function() {
+    orderPage.clickContinueShoppingBTN();
+});

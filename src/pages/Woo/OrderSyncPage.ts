@@ -4,7 +4,9 @@ const yaml = require('js-yaml');
 const YAML =require('js-yaml');
 const fs = require('fs');
 const path = require('path');
-import { ElementOrder, ElementCheckout } from 'src/pages/elements/Elements';
+let dueDates = './src/Data/Json/dueDates.json';
+
+import { ElementOrder, ElementCheckout, ElementOMSLineItem } from 'src/pages/elements/Elements';
 
 // const image = fs.readFileSync('../Data/Images')
 let orderValue = yaml.safeLoad(
@@ -87,9 +89,58 @@ class OrderSyncPage extends Page {
 
 
     }
+
+    applyRush(value){
+        let rushElem = $("//label[@for = '"+value+"']");
+        super.syncDisplayTill(rushElem);
+        super.staticWaitAndclick(rushElem);
+
+    }
+
     saveOrderToJson(){
         let data = {order_num:this.orderIdGlobal};
         super.syncJSonUpdate(jsonOrderPath,data);
+    }
+
+    userGotoAccounts(){
+        browser.url('/my-account');
+        super.waitTillViewPort($("//div[@class='orderDetails']//h2"));
+    }
+    openOrderFromRecent(){
+        let jsonOrder = super.syncJsonRead(dueDates);
+        let yamlOrder = jsonOrder['order_num'];
+        let elem = $("//a[contains(text(),'"+yamlOrder+"')]");
+        elem.waitForExist();
+        elem.scrollIntoView();
+        super.waitTillViewPort(elem);
+        elem.click();
+
+    }
+
+    verifyCustomMessage(value){
+        try {
+
+            let message = orderValue[value];
+            let elem = $("//div[contains(text(),'" + message + "')]");
+            // let elem = $(ElementOrder.orderUploadLabel);
+            elem.waitForExist();
+            elem.scrollIntoView();
+            browser.waitUntil(() => elem.isDisplayedInViewport(), {
+                timeout: 10000,
+                interval: 1000,
+                timeoutMsg: 'custom message not appeard',
+            });
+            let elemText = elem.getText();
+            expect(elemText).toContain(elemText);
+        }catch (e){
+            console.log("Verify custom Message Catch",e);
+            let expected ="Thanks so much and have a great day!"
+            let elem = $("//div[@class='item admin']//p[contains(text(),'Thanks so much and have a great day!')]");
+            let elemText = elem.getText();
+            expect(elemText).toContain(elemText);
+
+        }
+
     }
 
 

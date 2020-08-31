@@ -32,7 +32,6 @@ class Homepage extends Page {
         await expect(actualTitle).toEqual(expectedTitle);
         browser.maximizeWindow();
         let val = await browser.getWindowSize();
-         console.log(val);
     }
     async gotoMyAccount() {
         let expectedUrl = 'https://qa.cuddleclones.com/my-account/';

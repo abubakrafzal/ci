@@ -8,7 +8,6 @@ let credentials = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/users.yml', 'utf8')
 );
 
-
 class OMSHomePage extends Page {
     newWindowOMS() {
         let OMS_URL;
@@ -20,121 +19,111 @@ class OMSHomePage extends Page {
         browser.newWindow(OMS_URL);
         expect(OMS_URL).toContain(browser.getUrl());
     }
-    loginToOMS(value){
-        try{
-        let username = credentials[value]['username'];
-        let password = credentials[value]['password'];
-        let usernameElem = $(ElementOMSHome.usernameElem);
-        let passwordElem = $(ElementOMSHome.passwordElem);
+    loginToOMS(value) {
+        try {
+            let username = credentials[value]['username'];
+            let password = credentials[value]['password'];
+            let usernameElem = $(ElementOMSHome.usernameElem);
+            let passwordElem = $(ElementOMSHome.passwordElem);
 
-        super.syncWaitExistAndEnter(usernameElem,username);
-        super.syncWaitExistAndEnter(passwordElem,password);
-        let submitValue =
-        super.syncWaitExistAndClick($(ElementOMSHome.submitElem));
-
+            super.syncWaitExistAndEnter(usernameElem, username);
+            super.syncWaitExistAndEnter(passwordElem, password);
+            let submitValue = super.syncWaitExistAndClick(
+                $(ElementOMSHome.submitElem)
+            );
+        } catch (e) {
+            console.log('User Already logged in');
         }
-        catch (e){
-            console.log("User Already logged in");
-        }
-
+    }
+    clickGenericFromPanel(value) {
+        let elem = $("//a[contains(text(),'" + value + "')]");
+        elem.waitForExist();
+        elem.waitForClickable();
+        elem.click();
+        // super.syncWaitExistAndClick(elem);
 
     }
-    clickGenericFromPanel(value){
-        let elem = $("//a[contains(text(),'"+value+"')]")
-        super.syncWaitExistAndClick(elem);
-        let pageTitleELem= $(ElementOMSHome.pageTitleElem);
+    verifyStatus(value) {
+        let pageTitleELem = $(ElementOMSHome.pageTitleElem);
         browser.waitUntil(() => pageTitleELem.getText() === value, {
             timeout: 10000,
-            interval: 1000,
-            timeoutMsg: 'expected text to be different after 5s',
+            interval: 3000,
+            timeoutMsg: 'expected text to be different ',
         });
         let pageTitleElemText = pageTitleELem.getText().toUpperCase();
 
         expect(pageTitleElemText).toEqual(value.toUpperCase());
-
     }
-    clickDashboardFromPanel(){
+    clickDashboardFromPanel() {
         let elem = $(ElementOMSHome.dashboardElem);
         super.syncWaitExistAndClick(elem);
-        let pageTitleELem= $(ElementOMSHome.pageTitleElem);
-        let expected = "Dashboard"
+        let pageTitleELem = $(ElementOMSHome.pageTitleElem);
+        let expected = 'Dashboard';
         expect(pageTitleELem.getText()).toEqual(expected);
-
     }
 
-    clickEmployeesFromPanel(){
+    clickEmployeesFromPanel() {
         let elem = $(ElementOMSHome.employeesElem);
         super.syncWaitExistAndClick(elem);
-        let pageTitleELem= $(ElementOMSHome.pageTitleElem);
-        let expected = "Employees"
+        let pageTitleELem = $(ElementOMSHome.pageTitleElem);
+        let expected = 'Employees';
         expect(pageTitleELem.getText()).toEqual(expected);
-
     }
-    clickHolidaysFromPanel(){
+    clickHolidaysFromPanel() {
         let elem = $(ElementOMSHome.holidaysElem);
         super.syncWaitExistAndClick(elem);
-        let pageTitleELem= $(ElementOMSHome.pageTitleElem);
-        let expected = "Holidays"
+        let pageTitleELem = $(ElementOMSHome.pageTitleElem);
+        let expected = 'Holidays';
         expect(pageTitleELem.getText()).toEqual(expected);
-
     }
-    clickImportProductFromPanel(){
+    clickImportProductFromPanel() {
         let elem = $(ElementOMSHome.importProductsElem);
         super.syncWaitExistAndClick(elem);
-        let pageTitleELem= $(ElementOMSHome.pageTitleElem);
-        let expected = "Import Products"
+        let pageTitleELem = $(ElementOMSHome.pageTitleElem);
+        let expected = 'Import Products';
         expect(pageTitleELem.getText()).toEqual(expected);
-
     }
-    clickLineItemFromPanel(){
+    clickLineItemFromPanel() {
         let elem = $(ElementOMSHome.lineItemsElem);
         super.syncWaitExistAndClick(elem);
-        let pageTitleELem= $(ElementOMSHome.pageTitleElem);
-        let expected = "Line Items"
+        let pageTitleELem = $(ElementOMSHome.pageTitleElem);
+        let expected = 'Line Items';
         expect(pageTitleELem.getText()).toEqual(expected);
-
     }
-    clickOrderFromPanel(){
+    clickOrderFromPanel() {
         let orderPanelElem = $(ElementOMSHome.orderPanelElem);
         super.syncWaitExistAndClick(orderPanelElem);
-        let pageTitleELem= $(ElementOMSHome.pageTitleElem);
-        let expected = "Orders";
+        let pageTitleELem = $(ElementOMSHome.pageTitleElem);
+        let expected = 'Orders';
         browser.waitUntil(() => pageTitleELem.getText() === expected, {
             timeout: 10000,
             interval: 1000,
             timeoutMsg: 'expected text to be different after 5s',
         });
         expect(pageTitleELem.getText()).toEqual(expected);
-
     }
 
-    clickProductsFromPanel(){
+    clickProductsFromPanel() {
         let elem = $(ElementOMSHome.productsElem);
         super.syncWaitExistAndClick(elem);
-        let pageTitleELem= $(ElementOMSHome.pageTitleElem);
-        let expected = "Products"
+        let pageTitleELem = $(ElementOMSHome.pageTitleElem);
+        let expected = 'Products';
         expect(pageTitleELem.getText()).toEqual(expected);
-
     }
-    clickShipStationFromPanel(){
+    clickShipStationFromPanel() {
         let elem = $(ElementOMSHome.shipStationOrdersElem);
         super.syncWaitExistAndClick(elem);
-        let pageTitleELem= $(ElementOMSHome.pageTitleElem);
-        let expected = "Shipstation Orders"
+        let pageTitleELem = $(ElementOMSHome.pageTitleElem);
+        let expected = 'Shipstation Orders';
         expect(pageTitleELem.getText()).toEqual(expected);
-
     }
-    clickStatusMapFromPanel(){
+    clickStatusMapFromPanel() {
         let elem = $(ElementOMSHome.statusMappingsElem);
         super.syncWaitExistAndClick(elem);
-        let pageTitleELem= $(ElementOMSHome.pageTitleElem);
-        let expected = "Status Mappings"
+        let pageTitleELem = $(ElementOMSHome.pageTitleElem);
+        let expected = 'Status Mappings';
         expect(pageTitleELem.getText()).toEqual(expected);
-
     }
-
-
-
 
 }
 export default new OMSHomePage();

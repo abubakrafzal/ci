@@ -14,4 +14,5 @@ Then(/^User Go to OMS Order from Panel$/, function() {
 });
 Then(/^User Go to OMS "([^"]*)" from Panel$/, function(text) {
     omsHomePage.clickGenericFromPanel(text);
+    omsHomePage.verifyStatus(text);
 });

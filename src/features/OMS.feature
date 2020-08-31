@@ -1,9 +1,9 @@
+@OMS
 Feature: TS 1 OMS: Place the order of Different Plush Products
  OMS: Plush clone - No workflow
 
 
-
-  @Dump
+  @Dump @OMS
   Scenario: TC-10: Dump Data to go smooth OMS
     Given Super User go to Admin Site
     When  User click On Wocommerce from side panel
@@ -31,8 +31,20 @@ Feature: TS 1 OMS: Place the order of Different Plush Products
           | SuperAdmin    |
 
 
-  @Smoke @OMS @regression
+  @Smoke @OMS @regression @updateshipping
   Scenario Outline: TC-11: Verify the Shipping , Order, billing Meta Data.
+    Given Super User go to Admin Site
+    When  User click On Wocommerce from side panel
+    And   User go to orders list
+    Then  User go to order Static details
+    And   User hit the Update Button
+    When  User go to Edit the Billing Data
+    Then  User get the Values of Billing
+    Then  User go to Edit the Shipping Data
+    And   User get the Values of Shipping
+    Then  User get the values of Item
+    Then  Dump all the data to the Static YamlFile
+    Then  Close All the tabs except Base
     Given User is on Login Page of OMS
     When  User Login With "<Credential>" Username and Password
     Then  User Go to OMS Order from Panel
@@ -57,6 +69,7 @@ Feature: TS 1 OMS: Place the order of Different Plush Products
     And   Verify The Shipping "<MetaData>" Country
     And   Verify The Shipping "<MetaData>" State
     And   Verify The Shipping "<MetaData>" City
+
     And   Verify The Shipping "<MetaData>" Postcode
 
 
@@ -72,14 +85,137 @@ Feature: TS 1 OMS: Place the order of Different Plush Products
     And   User Go to  Line Item "<MetaData>" details
     Then  User Verify Item "<Item Status>" Status
     When  User hit the OMS Update Button
+    Then  User wait for the Line Item Successful Alert
     And   Assignment Manager Should be "<Item Status>"
     When  User Go to OMS "Employees" from Panel
     Then  User Verify the "<Item Status>" Manager Email with Title
 
+    Examples:
+      | Credential    | MetaData      |  Item Status          |
+      | SuperAdmin    | OrderData     |  New Item             |
 
+
+@Status @Smoke @TS3
+  Scenario Outline: TS 3 OMS: Updating statuses in OMS reflects back to WooCommerce
+    Given User is on Login Page of OMS
+    When  User Login With "<Credential>" Username and Password
+    Then  User Go to OMS "Line Items" from Panel
+    And   User Go to  Line Item "<MetaData>" details
+    Then  User Verify Item "<Item Status>" Status
+    When  User hit the OMS Update Button
+    Then  User copy the order number
+    And   Close All the tabs except Base
+    Given Super User go to Admin Site
+    When  User click On Wocommerce from side panel
+    And   User go to orders list
+    Then  User go to line order details
+    And   Verify OMS "<Item Status>" from WooCommerce
+    Then  Verify WooAdmin "<Item Status>" from WooCommerce
 
 
     Examples:
       | Credential    | MetaData      |  Item Status      |
-      | SuperAdmin    | OrderData     |  New Item         |
+      | SuperAdmin    | OrderData     |  Feedback Provided    |
+
+
+
+
+  @OMS @Update
+  Scenario Outline: User able to update billing and shipping and verify from WOOAdmin Site
+
+
+    Given User is on Login Page of OMS
+    When  User Login With "<Credential>" Username and Password
+    Then  User Go to OMS Order from Panel
+    And  User Select applied static Order from the List
+    When  User Go to Billing Address Block
+    And   Update The Billing "<MetaData>" FirstName
+    And   Update The Billing "<MetaData>" LastName
+    And   Update The Billing "<MetaData>" Address1
+    And   Update The Billing "<MetaData>" Address2
+    And   Update The Billing "<MetaData>" Country
+    And   Update The Billing "<MetaData>" State
+    And   Update The Billing "<MetaData>" Email
+    And   Update The Billing "<MetaData>" City
+    And   Update The Billing "<MetaData>" Postcode
+    And   Update The Billing "<MetaData>" Phone
+    Then  User Go to Shipping Address Block
+    And   Update The Shipping "<MetaData>" FirstName
+    And   Update The Shipping "<MetaData>" LastName
+    And   Update The Shipping "<MetaData>" Address1
+    And   Update The Shipping "<MetaData>" Address2
+    And   Update The Shipping "<MetaData>" Country
+    And   Update The Shipping "<MetaData>" State
+    And   Update The Shipping "<MetaData>" City
+    And   Update The Shipping "<MetaData>" Postcode
+    When  User hit the OMS Update Button
+    And   Verify order alert Success
+    Then  Close All the tabs except Base
+    Given Super User go to Admin Site
+    When  User click On Wocommerce from side panel
+    And   User go to orders list
+    Then  User go to second order Static details
+    And   User hit the Update Button
+    When  User go to Edit the Billing Data
+    Then  User get new the Values of Billing
+    Then  User go to Edit the Shipping Data
+    Then  User Verify the Billing "<MetaData>" from WooAdmin
+    And   User Verify the Shipping "<MetaData>" from WooAdmin
+
+
+
+    Examples:
+      | Credential    | MetaData      | OrderNumber      |
+      | SuperAdmin    | OrderData     |    Update        |
+
+
+
+
+
+
+#  @Smoke @OMS @regression @Update
+#  Scenario Outline: TC-17: Verify that Super User is able to update the Billing data.
+#    Given Super User go to Admin Site
+#    When  User click On Wocommerce from side panel
+#    And   User go to orders list
+#    Then  User go to order number "<OrderNumber>" details
+#    And   User hit the Update Button
+#    When  User go to Edit the Billing Data
+#    Then  User get the Values of Billing
+#    Then  User go to Edit the Shipping Data
+#    And   User get the Values of Shipping
+#    Then  User get the values of Item
+#    Then  Dump all the data to the "<OrderNumber>" YamlFile
+#    Then  Close All the tabs except Base
+#    Given User is on Login Page of OMS
+#    When  User Login With "<Credential>" Username and Password
+#    Then  User Go to OMS Order from Panel
+#    And   User Select applied Order from the List
+#    Then  User Verify the "<MetaData>" Order Date
+#    When  User Go to Billing Address Block
+#    And   Update The Billing "<MetaData>" FirstName
+#    And   Update The Billing "<MetaData>" LastName
+#    And   Update The Billing "<MetaData>" Address1
+#    And   Update The Billing "<MetaData>" Address2
+#    And   Update The Billing "<MetaData>" Country
+#    And   Update The Billing "<MetaData>" State
+#    And   Update The Billing "<MetaData>" Email
+#    And   Update The Billing "<MetaData>" City
+#    And   Update The Billing "<MetaData>" Postcode
+#    And   Update The Billing "<MetaData>" Phone
+#    Then  User Go to Shipping Address Block
+#    And   Update The Shipping "<MetaData>" FirstName
+#    And   Update The Shipping "<MetaData>" LastName
+#    And   Update The Shipping "<MetaData>" Address1
+#    And   Update The Shipping "<MetaData>" Address2
+#    And   Update The Shipping "<MetaData>" Country
+#    And   Update The Shipping "<MetaData>" State
+#    And   Update The Shipping "<MetaData>" City
+#    And   Update The Shipping "<MetaData>" Postcode
+#
+#
+#    Examples:
+#      | Credential    | MetaData      | OrderNumber      |
+#      | SuperAdmin    | OrderData     |    Update        |
+
 

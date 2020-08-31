@@ -3,12 +3,18 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const yaml = require('js-yaml');
 const YAML = require('js-yaml');
+const moment = require('moment-business-days');
 
 const fs = require('fs');
 const fsextra = require('fs-extra');
+let calendarValue = yaml.safeLoad(
+    fs.readFileSync('./src/Data/Yaml/chineseholidays.yml', 'utf8')
+);
 export default class Page {
     public orderIdGlobal: number;
     public petIdGlobal: number;
+    public parent: string;
+    public staticOrderIDGlobal:number;
 
     public async clearInputField(selector) {
         let element = await selector;
@@ -99,19 +105,17 @@ export default class Page {
         });
     }
 
-    syncWaitExistAndText(selector):string {
+    syncWaitExistAndText(selector): string {
         try {
             selector.waitForExist();
             selector.scrollIntoView();
-            if(selector.getText() === ''){
-                return selector.getAttribute("value");
+            if (selector.getText() === '') {
+                return selector.getAttribute('value');
             }
             return selector.getText();
+        } catch (e) {
+            console.log('syncWaitExistAndText Error' + selector + e);
         }
-        catch (e) {
-            console.log("syncWaitExistAndText Error"+selector + e);
-        }
-        
     }
     syncWaitExistAndClick(selector) {
         try {
@@ -144,7 +148,14 @@ export default class Page {
         selector.waitForExist();
         selector.scrollIntoView();
         selector.waitForDisplayed();
-        console.log('$ Selector'+selector+'Actual value' +actualValue+'Expected value'+expectedValue);
+        console.log(
+            '$ Selector' +
+                selector +
+                'Actual value' +
+                actualValue +
+                'Expected value' +
+                expectedValue
+        );
         expect(actualValue).toContain(expectedValue);
     }
 
@@ -170,7 +181,22 @@ export default class Page {
         parsed = { ...parsed, ...object };
         let json = JSON.stringify(parsed); //convert it back to json
         fs.writeFileSync(jsonFile, json); // write it back
-        console.log(json);
+    }
+    syncJSonUpdateObject(jsonFile, object, key) {
+        let response = fs.readFileSync(jsonFile, 'utf8');
+        let parsed = JSON.parse(response); //now it an object
+        let newData;
+        console.log(parsed);
+        if (!parsed[key]) {
+            console.log("if");
+            newData = { ...parsed, ...object };
+        } else {
+            console.log()
+            let data = { ...parsed[key], ...object[key] };
+            console.log(data)
+
+            newData = { [key]: { ...data } };
+        }
     }
     syncJsonRead(jsonFile) {
         let response = fs.readFileSync(jsonFile, 'utf8');
@@ -178,9 +204,7 @@ export default class Page {
     }
     async asyncJsonRead(jsonFile) {
         try {
-            const packageObj = await fsextra.readJson(jsonFile);
-            console.log(packageObj); // => 0.1.3
-            return packageObj;
+            return await fsextra.readJson(jsonFile);
         } catch (err) {
             console.error(err);
         }
@@ -216,6 +240,16 @@ export default class Page {
         await fs.appendFileSync(testYmlPath, yaml);
     }
 
+    verifyDates(value): string {
+        let chinese_holidays = calendarValue['calendar2020'];
+        moment.updateLocale('us', {
+            holidays: chinese_holidays,
+            holidayFormat: 'DDMMM',
+        });
+        return moment(moment().get('date'), 'DDMMM')
+            .businessAdd(value)
+            .format('MM/DD/YYYY');
+    }
     //READER HELPER
     getTitleURL() {
         return {
@@ -228,7 +262,6 @@ export default class Page {
             .match(/\d+/g)
             .map(Number)
             .join();
-        console.log(splitter);
         return splitter;
     }
 }

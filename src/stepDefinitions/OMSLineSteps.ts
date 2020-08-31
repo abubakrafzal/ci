@@ -19,3 +19,12 @@ Then(/^Assignment Manager Should be "([^"]*)"$/, function(text) {
 When(/^User hit the OMS Update Button$/, function() {
     oMSLinePage.clickUpdateLineItem();
 });
+Then(/^User copy the order number$/, function() {
+    oMSLinePage.saveTheOrderID();
+});
+Then(/^User go to line order details$/, function() {
+    oMSLinePage.openWOOAdminStatusChangeOrder();
+});
+Then(/^User wait for the Line Item Successful Alert$/, function() {
+    oMSLinePage.SuccessAlert();
+});
