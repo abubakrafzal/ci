@@ -276,10 +276,9 @@ class AdminSyncPage extends Page {
        let orderStaticValue= orderStatic.getText();
         orderStatic.click();
 
-        let value = this.SplitNumbers(orderStaticValue);
-        this.staticOrderIDGlobal = value;
+        this.staticOrderIDGlobal = this.SplitNumbers(orderStaticValue);
          console.log("staticOD",this.staticOrderIDGlobal)
-        super.syncJSonUpdate(jsonOrderPath,{order_num:value});
+        super.syncJSonUpdate(jsonOrderPath,{order_num:this.staticOrderIDGlobal});
     }
 
     saveOrderAdminJson2(text){

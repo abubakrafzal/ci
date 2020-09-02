@@ -276,6 +276,8 @@ export const ElementOMSLineItem = {
 };
 
 export const ElementOMSEmploye = {
+    EmployePage:"//div[contains(text(),'Per page:')]//select",
+    displayPaginationElem:"//div[@class='pagination_information']//b",
 
 };
 

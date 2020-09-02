@@ -267,8 +267,9 @@ class OrderPage extends Page {
     }
 
     async EnterValueCard(value) {
-        await browser.pause(7000);
+        await browser.pause(8000);
         let iframe = await $("//iframe[@id='card_number']");
+        iframe.waitForExist();
         await browser.switchToFrame(iframe);
 
         let cardNum = await $(ElementCheckout.cardElem);

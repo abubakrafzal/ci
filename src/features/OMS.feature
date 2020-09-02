@@ -1,5 +1,5 @@
 @OMS
-Feature: TS 1 OMS: Place the order of Different Plush Products
+Feature:TS3,TS4 Updating statuses in OMS reflects back to WooCommerce
  OMS: Plush clone - No workflow
 
 
@@ -77,7 +77,7 @@ Feature: TS 1 OMS: Place the order of Different Plush Products
       | MetaData      | Credential    |
       | OrderData     | SuperAdmin    |
 
-  @Smoke @OMS @regression @line
+  @Smoke @OMS @regression @Employe
   Scenario Outline: TC-12: Verify the plush order is assigned to Plush Manager and status "New Item"
     Given User is on Login Page of OMS
     When  User Login With "<Credential>" Username and Password
@@ -88,11 +88,12 @@ Feature: TS 1 OMS: Place the order of Different Plush Products
     Then  User wait for the Line Item Successful Alert
     And   Assignment Manager Should be "<Item Status>"
     When  User Go to OMS "Employees" from Panel
+    Then  User click to display all employes
     Then  User Verify the "<Item Status>" Manager Email with Title
 
     Examples:
       | Credential    | MetaData      |  Item Status          |
-      | SuperAdmin    | OrderData     |  New Item             |
+      | SuperAdmin    | OrderData     |  Approved            |
 
 
 @Status @Smoke @TS3
@@ -127,7 +128,7 @@ Feature: TS 1 OMS: Place the order of Different Plush Products
     Given User is on Login Page of OMS
     When  User Login With "<Credential>" Username and Password
     Then  User Go to OMS Order from Panel
-    And  User Select applied static Order from the List
+    And   User Select applied static Order from the List
     When  User Go to Billing Address Block
     And   Update The Billing "<MetaData>" FirstName
     And   Update The Billing "<MetaData>" LastName

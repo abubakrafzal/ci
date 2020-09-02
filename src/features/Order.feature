@@ -23,7 +23,7 @@ Feature: TS 1 WOO: Place the order of Different Plush Products
       | Pet       |
       | Pet_dog   |
 
-  @Smoke @Add_to_cart @regression
+  @Smoke @Add_to_cart @regression @plush
   Scenario Outline: Add a Plush Clone Product
     Given User is on HomePage
     When  User go to product

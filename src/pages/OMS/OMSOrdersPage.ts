@@ -247,6 +247,7 @@ class OMSOrdersPage extends Page {
         let yamlExpected = omsUpdateValue[value]['billing_lastname'];
 
         let billingLastNameElem = $(ElementOMSOrder.billinglastNameElem);
+        super.syncWaitExistAndEnter(billingLastNameElem,yamlExpected);
 
         let actualValue = billingLastNameElem.getAttribute('value');
         super.syncVerifyContainElem(billingLastNameElem,actualValue,yamlExpected);
@@ -300,13 +301,14 @@ class OMSOrdersPage extends Page {
         let yamlExpected = omsUpdateValue[value]['billing_country'];
         let regExp = /\(([^)]+)\)/;
         let yamlExpectedSlice = regExp.exec(yamlExpected);
+        let enterValue = yamlExpectedSlice[1];
         let elem = $(ElementOMSOrder.billingcountryElem);
         elem.clearValue();
         browser.pause(3000);
-        super.syncWaitExistAndEnter(elem,"US");
+        super.syncWaitExistAndEnter(elem,enterValue);
 
         let actualValue = elem.getAttribute('value');
-        super.syncVerifyContainElem(elem,actualValue,yamlExpectedSlice[1]);
+        super.syncVerifyContainElem(elem,actualValue,enterValue);
 
     }
     setBillingCountryState(value) {
@@ -417,15 +419,15 @@ class OMSOrdersPage extends Page {
         let yamlExpected = omsUpdateValue[value]['shipping_country'];
         let regExp = /\(([^)]+)\)/;
         let yamlExpectedSlice = regExp.exec(yamlExpected);
-
+        let entervalue = yamlExpectedSlice[1];
         let elem = $(ElementOMSOrder.shippingcountryElem);
         elem.clearValue();
         browser.pause(3000);
 
-        super.syncWaitExistAndEnter(elem,"UK");
-
+        super.syncWaitExistAndEnter(elem,entervalue);
+        // browser.debug();
         let actualValue = elem.getAttribute('value');
-        super.syncVerifyContainElem(elem,actualValue,yamlExpectedSlice[1]);
+        super.syncVerifyContainElem(elem,actualValue,entervalue);
 
     }
     setShippingState(value) {

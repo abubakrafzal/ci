@@ -53,7 +53,7 @@ Feature:TS 5 OMS: Plush Due Dates
 
     Examples:
       | Credential          |  Item Status                          | Rush           |
-      | SuperAdmin          |  Shipped                              | 2 Weeks        |
+      | SuperAdmin          |  Ship from hq to customer expected    | 2 Weeks        |
 
 
   @Status @Smoke @Request
@@ -81,3 +81,4 @@ Feature:TS 5 OMS: Plush Due Dates
     Examples:
       | Credential          |
       | SuperAdmin          |
+

@@ -3,7 +3,7 @@ import Page from 'src/pages/Page';
 const yaml = require('js-yaml');
 const fs = require('fs');
 const path = require('path');
-import { ElementOrder, ElementCheckout } from 'src/pages/elements/Elements';
+import { ElementOrder, ElementCheckout, ElementOMSEmploye } from 'src/pages/elements/Elements';
 
 // const image = fs.readFileSync('../Data/Images')
 let orderValue = yaml.safeLoad(
@@ -17,6 +17,21 @@ let rolesValue = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/Roles.yml', 'utf8')
 );
 class OMSEmployesPage extends Page {
+    showAllEmploye(){
+    let elem = $(ElementOMSEmploye.EmployePage);
+        elem.scrollIntoView();
+        super.syncDisplayTill(elem);
+        elem.selectByVisibleText("500");
+        let verifyElem = $(ElementOMSEmploye.displayPaginationElem);
+        browser.waitUntil(() => verifyElem.getText().includes("all") , {
+            timeout: 10000,
+            interval: 1000,
+            timeoutMsg: 'expected text to be different after 5s',
+        });
+        let verifyElemText = verifyElem.getText();
+
+        expect(verifyElemText).toContain("all");
+    }
     verifyEmployee(value){
         let response = super.syncJsonRead(OmsRoles);
         let val = response[value];

@@ -125,6 +125,7 @@ class OMSLinePage extends Page {
         super.syncJSonUpdate(credentials,obj);
 
     }
+
     openWOOAdminStatusChangeOrder() {
         let jsonOrder = super.syncJsonRead(credentials);
         let yamlOrder = jsonOrder['order_num'];
