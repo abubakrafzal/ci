@@ -2,27 +2,22 @@ import Page from 'src/pages/Page';
 import { ElementOMSLineItem } from 'src/pages/elements/Elements';
 import { FilePath } from 'src/pages/elements/FilePath';
 
-const moment = require('moment-business-days');
 
 const yaml = require('js-yaml');
 const fs = require('fs');
-const path = require('path');
-let calendarValue = yaml.safeLoad(
-    fs.readFileSync('./src/Data/Yaml/chineseholidays.yml', 'utf8')
-);
-// const image = fs.readFileSync('../Data/Images')
-let omsValue = yaml.safeLoad(
-    fs.readFileSync(FilePath.OmsYaml, 'utf8')
-);
+
 let rolesValue = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/Roles.yml', 'utf8')
 );
 let OmsRoles ="./src/Data/Json/OmsRoles.json";
 let credentials ="./src/Data/Json/credentials.json";
+let jsonOrderPath = FilePath.ApiJson;
 
 class OMSLinePage extends Page {
+    omsValue = super.syncJsonRead(jsonOrderPath);
+
     clickSelectLineItem(value) {
-        let yamlValue = omsValue[value]['line_item'];
+        let yamlValue = this.omsValue[value]['line_items'][0]['id'];
         let lineElem = $("//a[contains(text(),'" + yamlValue + "')]");
         super.syncWaitExistAndClick(lineElem);
     }
@@ -126,9 +121,9 @@ class OMSLinePage extends Page {
 
     }
 
-    openWOOAdminStatusChangeOrder() {
+    openWOOAdminStatusChangeOrder(value) {
         let jsonOrder = super.syncJsonRead(credentials);
-        let yamlOrder = jsonOrder['order_num'];
+        let yamlOrder = this.omsValue[value]["line_items"][0]['id'];
         let selectOrderElem = $(
             "//strong[contains(text(),'" + yamlOrder + "')]"
         );

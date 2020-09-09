@@ -65,3 +65,6 @@ When(/^Verify OMS "([^"]*)" from WooCommerce$/, function(text) {
 Then(/^Verify WooAdmin "([^"]*)" from WooCommerce$/, function(text) {
     adminSyncPage.getWooItemStatus(text);
 });
+Then(/^User go to Order "([^"]*)" Number$/, function(text) {
+    adminSyncPage.omsOrderItem(text);
+});

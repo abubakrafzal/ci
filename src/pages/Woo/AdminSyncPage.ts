@@ -1,5 +1,6 @@
 import Page from 'src/pages/Page';
 import { ElementAdmin } from 'src/pages/elements/Elements';
+import { FilePath } from 'src/pages/elements/FilePath';
 
 const yaml = require('js-yaml');
 const YAML = require('js-yaml');
@@ -23,13 +24,16 @@ let paymentValue = yaml.safeLoad(
 let pathValue = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/paths.yml', 'utf8')
 );
-let jsonOrderPath = './src/Data/Json/OrderData.json';
+let jsonOrderPath = FilePath.ApiJson;
+
 let OmsData = './src/Data/Json/OmsData.json';
 
 let testYmlPath = './src/Data/Yaml/OMSData.yml';
 let staticYmlPath = './src/Data/Yaml/StaticOms.yml';
 
 class AdminSyncPage extends Page {
+    jsonReader = super.syncJsonRead(jsonOrderPath);
+
     syncWooAdminURL() {
         try {
 
@@ -263,7 +267,17 @@ class AdminSyncPage extends Page {
 
     }
 
+    omsOrderItem(value){
 
+        let orderValue  = this.jsonReader[value]['id'];
+        let orderStatic = $("//a[contains(text(),'"+orderValue+"')]");
+        orderStatic.waitForExist();
+        orderStatic.scrollIntoView();
+        orderStatic.waitForClickable();
+        browser.pause(2000);
+        orderStatic.click();
+
+    }
 
 
 

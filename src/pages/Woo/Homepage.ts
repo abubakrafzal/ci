@@ -1,7 +1,8 @@
 import Page from '../Page';
-import { assert,  should } from 'chai';
-// import { ElementHomePage } from 'src/pages/elements/Elements';
+import Api from '../../../src/support/api'
+let checkData = './src/Data/Json/check.json';
 
+import {data} from 'src/support/Data'
 class Homepage extends Page {
     /**
      * define elements
@@ -72,6 +73,11 @@ class Homepage extends Page {
                 console.log(e);
         }
     }
+
+    async PostOrder() {
+        await Api.apiPostOrder(data,"verify",checkData);
+    }
+
 
 }
 

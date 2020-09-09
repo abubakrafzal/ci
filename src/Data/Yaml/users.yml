@@ -6,8 +6,29 @@ SuperAdmin:
   username: admin@oms.com
   password: oms123#
 
+Plush Manager:
+  username: plushmanager@automation.com
+  password: oms123#
 
+Plush Employee:
+  username: plushemployee@automation.com
+  password: oms123#
 
+Customer Service:
+  username: customerservice@automation.com
+  password: oms123#
+
+Shipping:
+  username: shipping@automate.com
+  password: oms123#
+
+Operations:
+  username: operations@automate.com
+  password: oms123#
+
+Plush QA:
+  username: plushqa@automate.com
+  password: oms123#
 
 
 

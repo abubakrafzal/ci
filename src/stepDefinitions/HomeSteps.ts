@@ -16,3 +16,7 @@ When(/^User click the search$/, () => {
 Then(/^User click on my account$/, async function() {
     await homepage.gotoMyAccount();
 });
+
+Then(/^User post api data$/, async function() {
+    await homepage.PostOrder();
+});

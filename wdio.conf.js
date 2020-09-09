@@ -12,7 +12,6 @@ const reporter = require('cucumber-html-reporter');
 const currentTime = new Date().toJSON().replace(/:/g, '-');
 const sourceSpecDirectory = `src/features`;
 const jsonTmpDirectory = `reports/json/tmp/`;
-
 let featureFilePath = `${sourceSpecDirectory}/*.feature`;
 
 // If parallel execution is set to true, then create the Split the feature files
@@ -196,7 +195,8 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: [
-        ['selenium-standalone',{
+        ['selenium-standalone'
+            ,{
             logPath: 'logs',
             installArgs: {
                 drivers: {
@@ -208,7 +208,8 @@ exports.config = {
                     chrome: { version: '85.0.4183.83' },
                 }
             },
-        }],
+        }
+        ],
         [
             slack,
             {

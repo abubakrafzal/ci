@@ -22,8 +22,8 @@ When(/^User hit the OMS Update Button$/, function() {
 Then(/^User copy the order number$/, function() {
     oMSLinePage.saveTheOrderID();
 });
-Then(/^User go to line order details$/, function() {
-    oMSLinePage.openWOOAdminStatusChangeOrder();
+Then(/^User go to line order "([^"]*)" details$/, function(text) {
+    oMSLinePage.openWOOAdminStatusChangeOrder(text);
 });
 Then(/^User wait for the Line Item Successful Alert$/, function() {
     oMSLinePage.SuccessAlert();

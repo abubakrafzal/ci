@@ -14,7 +14,7 @@ On Hold:
 
 Patterns Assigned:
   item_status: Patterns Assigned
-  assignment_group: Plush Manager
+  assignment_group: Plush employee
   assigned_user: Test  QA 11
   oms_status: In Progress
   woo_status: In Progress
@@ -22,14 +22,14 @@ Patterns Assigned:
 
 Shaping Assigned:
   item_status: Shaping Assigned
-  assignment_group: Plush Manager
+  assignment_group: Plush employee
   assigned_user: Test  QA 11
   oms_status: In Progress
   woo_status: In Progress
 
 Airbrushing Assigned:
   item_status: Airbrushing Assigned
-  assignment_group: Plush Manager
+  assignment_group: Plush employee
   assigned_user: Test  QA 11
   oms_status: In Progress
   woo_status: In Progress

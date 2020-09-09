@@ -123,7 +123,9 @@ class OMSHomePage extends Page {
         let pageTitleELem = $(ElementOMSHome.pageTitleElem);
         let expected = 'Status Mappings';
         expect(pageTitleELem.getText()).toEqual(expected);
+
     }
+
 
 }
 export default new OMSHomePage();

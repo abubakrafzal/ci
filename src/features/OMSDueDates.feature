@@ -2,7 +2,7 @@
 Feature:TS 5 OMS: Plush Due Dates
   TC-23:TC-24:TC-25:TC-26:TC-27:TC-28:TC-29:TC-30:
 
-  @Smoke @Add_to_cart @regression @Rush
+  @Smoke @Add_to_cart @regression @DueRush
   Scenario Outline: Add a Plush Clone Product
     Given User is on HomePage
     When  User go to product
@@ -42,6 +42,7 @@ Feature:TS 5 OMS: Plush Due Dates
     Then  User Go to OMS "Orders" from Panel
     Then  User go to selected Order ID
     And   User Select "<Rush>" for the order
+#    When  User hit the OMS Update Button
     Then  User Go to OMS "Line Items" from Panel
     And   User Go to  Line Item against order
     Then  User Verify Item "<Item Status>" Status
@@ -54,6 +55,7 @@ Feature:TS 5 OMS: Plush Due Dates
     Examples:
       | Credential          |  Item Status                          | Rush           |
       | SuperAdmin          |  Ship from hq to customer expected    | 2 Weeks        |
+      | SuperAdmin          |  Ship from china to hq expected       | 2 Weeks        |
 
 
   @Status @Smoke @Request

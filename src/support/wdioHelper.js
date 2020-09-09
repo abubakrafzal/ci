@@ -28,7 +28,7 @@ module.exports.add = () => {
 module.exports.KeyHome = () => {
     try {
         browser.url(
-            '/my-account/?autologin_code=uI6j6U2RFjH4ECF466UtWHvNSfQIzZKq'
+            '/my-account/?autologin_code=hIcgyP08TEhfQSkaDyzxdNef5qznMgq4'
         );
     } catch (e) {
         console.log('KEY HOME Catch');

@@ -3,9 +3,7 @@ import omsOrderPage from 'src/pages/OMS/OMSOrdersPage';
 import { When } from 'cucumber'
 
 
-Then(/^User Select applied Order from the List$/, function() {
-    omsOrderPage.clickOrderFromTable();
-});
+
 Then(/^User Verify the "([^"]*)" Order Date$/, function(text) {
     omsOrderPage.getOrderDateCreated(text);
 });
@@ -133,5 +131,9 @@ When(/^Update The Shipping "([^"]*)" Postcode$/, function(text) {
 });
 When(/^Verify order alert Success$/, function() {
     omsOrderPage.orderSuccessFullMessage();
+
+});
+Then(/^User Select "([^"]*)" applied Order from the List$/, function(text) {
+    omsOrderPage.clickOrderFromTable(text);
 
 });

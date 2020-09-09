@@ -2,8 +2,11 @@ const fetch = require('node-fetch');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const yaml = require('js-yaml');
+import Api from 'src/support/api';
+
 const YAML = require('js-yaml');
 const moment = require('moment-business-days');
+const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 
 const fs = require('fs');
 const fsextra = require('fs-extra');
@@ -210,9 +213,11 @@ export default class Page {
         }
     }
 
+
     async syncWriteYaml(testYmlPath, object) {
         const raw = fs.readFileSync(testYmlPath);
         const data = YAML.safeLoad(raw);
+
         // Show the YAML
 
         // Modify the YAML
@@ -264,4 +269,24 @@ export default class Page {
             .join();
         return splitter;
     }
+    // async apiPostOr
+    //
+    //
+    //
+    // der() {
+    //
+    //     const res = await WooCommerce.post("orders", data);
+    //     console.log("what is root id ");
+    //     let obj = {};
+    //     var key = "chaka";
+    //
+    //     obj[key] = res.data;
+    //     // console.log(root.id = this.globalvar);
+    //     console.log("root", data.payment_method);
+    //
+    //     console.log("responsee", res.data);
+    //     console.log(obj);
+    //
+    //
+    // }
 }

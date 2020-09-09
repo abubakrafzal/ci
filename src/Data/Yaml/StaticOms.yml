@@ -1,23 +1,157 @@
 OrderData:
-  billing_address_line1: 1500 River Shore Drive
-  billing_address_line2: '313'
-  billing_city: Louisville
+  OMS:
+    _links:
+      collection:
+        - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/orders'
+      customer:
+        - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/customers/421015'
+      self:
+        - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/orders/533396'
+    billing:
+      address_1: 969 Market
+      address_2: ''
+      city: San Francisco
+      company: ''
+      country: US
+      email: aaron.hall@square63.com
+      first_name: Aaron
+      last_name: Hall
+      phone: '03331234567'
+      postcode: '94103'
+      state: CA
+    cart_hash: ''
+    cart_tax: '0.00'
+    coupon_lines: []
+    created_via: rest-api
+    currency: USD
+    customer_id: 421015
+    customer_ip_address: ''
+    customer_note: ''
+    customer_user_agent: ''
+    date_completed: null
+    date_completed_gmt: null
+    date_created: '2020-09-09T08:53:56'
+    date_created_gmt: '2020-09-09T12:53:56'
+    date_modified: '2020-09-09T08:53:57'
+    date_modified_gmt: '2020-09-09T12:53:57'
+    date_paid: '2020-09-09T08:53:57'
+    date_paid_gmt: '2020-09-09T12:53:57'
+    discount_tax: '0.00'
+    discount_total: '0.00'
+    fee_lines: []
+    id: 533396
+    line_items:
+      - id: 457072
+        meta_data:
+          - id: 3978082
+            key: pa_mouth-position
+            value: closed-with-tongue
+          - id: 3978083
+            key: pa_size
+            value: small
+          - id: 3978084
+            key: Pet ID
+            value: '10'
+          - id: 3978085
+            key: Pet Profile
+            value: >-
+              Test<br/><b>Species: </b>Dog (German Shepherd)<br/><br/><b>Left
+              Eye:</b> Dark Brown<br/><b>Right Eye:</b> Dark Brown<br/><b>Left
+              Ear:</b> Up<br/><b>Right Ear:</b> Up<br/><b>Characteristic 1:</b>
+              test<br/><b>Characteristic 2:</b> Test<br/><b>Characteristic
+              3:</b> Ekekdn<br/><b>Age: </b>2 Years Old<br/>
+          - id: 3978086
+            key: cs_logs
+            value: >-
+              a:4:{i:0;a:3:{s:9:"timestamp";s:19:"2020-09-09
+              12:53:57";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}i:1;a:3:{s:9:"timestamp";s:19:"2020-08-21
+              13:15:31";s:7:"message";s:165:"System uploaded folder on /Cuddle
+              Clones Share (Team Folder)/Website & Development/Sync
+              Development/QA/China/Plush Orders/Open Orders/532835 - Slippers -
+              Test -
+              Dog/";s:4:"type";s:4:"info";}i:2;a:3:{s:9:"timestamp";s:19:"2020-08-21
+              13:10:04";s:7:"message";s:65:"System created folder 532835 -
+              Slippers - Test - Dog on CC
+              server";s:4:"type";s:4:"info";}i:3;a:3:{s:9:"timestamp";s:19:"2020-08-21
+              13:00:27";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}}
+          - id: 3978087
+            key: item_status
+            value: New Item
+          - id: 3978088
+            key: item_status_internal
+            value: In Progress
+          - id: 3978089
+            key: item_status_external
+            value: In Progress
+          - id: 3978090
+            key: Zipper Pouch (&#36;20)
+            value: Not Included
+        name: Plush Slippers
+        price: 199
+        product_id: 2177
+        quantity: 1
+        sku: ''
+        subtotal: '199.00'
+        subtotal_tax: '0.00'
+        tax_class: ''
+        taxes: []
+        total: '199.00'
+        total_tax: '0.00'
+        variation_id: 14029
+    meta_data:
+      - id: 15707696
+        key: _last_status
+        value: pending
+      - id: 15707697
+        key: _status_history
+        value:
+          - processing
+    number: '533396'
+    order_key: wc_order_kZiVuGK6e3b2Z
+    parent_id: 0
+    payment_method: bacs
+    payment_method_title: Direct Bank Transfer
+    prices_include_tax: false
+    refunds: []
+    shipping:
+      address_1: 969 Market
+      address_2: ''
+      city: San Francisco
+      company: ''
+      country: US
+      first_name: Aaron
+      last_name: Hall
+      postcode: '94103'
+      state: CA
+    shipping_lines: []
+    shipping_tax: '0.00'
+    shipping_total: '0.00'
+    status: processing
+    tax_lines: []
+    total: '199.00'
+    total_tax: '0.00'
+    transaction_id: ''
+    version: 4.2.0
+  billing_address_line1: 969 Market
+  billing_address_line2: ''
+  billing_city: San Francisco
   billing_company: ''
   billing_country: United States (US)
-  billing_email: eric.littleton@cuddleclones.com
-  billing_firstName: erictest
-  billing_lastname: littletontest
-  billing_phone: '2702028224'
-  billing_postal_code: '40206'
-  billing_state: Michigan
-  billing_transaction: ch_1HMsldHeGtzx7vqFNdDwynT4
-  line_item: '456793'
-  order_created_date: '2020-09-02'
-  order_num: '533250'
-  shipping_address_line1: 1500 River Shore Drive
-  shipping_city: Louisville
+  billing_email: aaron.hall@square63.com
+  billing_firstName: Aaron
+  billing_lastname: Hall
+  billing_phone: '03331234567'
+  billing_postal_code: '94103'
+  billing_state: California
+  billing_transaction: ''
+  line_item: '457072'
+  order_created_date: '2020-09-09'
+  shipping_address_line1: 969 Market
+  shipping_city: San Francisco
   shipping_country: United States (US)
-  shipping_firstName: erictest
-  shipping_lastname: littletontest
-  shipping_postal_code: '40206'
-  shipping_state: Michigan
+  shipping_firstName: Aaron
+  shipping_lastname: Hall
+  shipping_postal_code: '94103'
+  shipping_state: California

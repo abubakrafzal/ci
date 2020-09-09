@@ -58,6 +58,7 @@ class OMSDueDatesPage extends Page {
         selectOrder.scrollIntoView();
         super.syncDisplayTill(selectOrder);
         selectOrder.selectByVisibleText(value);
+        browser.debug();
     }
 
     getRushWeeks() {

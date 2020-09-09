@@ -38,6 +38,7 @@
         "@wdio/spec-reporter": "^6.0.8",
         "@wdio/static-server-service": "^6.0.8",
         "@wdio/sync": "^6.0.8",
+        "@woocommerce/woocommerce-rest-api": "^1.0.1",
         "allure-commandline": "^2.13.0",
         "chai": "^4.2.0",
         "chromedriver": "^84.0.1",
