@@ -25,7 +25,8 @@ class Helper extends Page {
     openAppliedOrder(value) {
         try{
             let jsonOrder = super.syncJsonRead(jsonOrderPath);
-            let yamlOrder = jsonOrder['OMS']['id'];
+            let yamlOrder = jsonOrder[value]['id'];
+
             console.log("yamllll",yamlOrder);
 
             let selectOrderElem = $(

@@ -201,15 +201,28 @@ class OrderPage extends Page {
     }
     async selectPet() {
         // let selectPet = await $(ElementOrder.selectPet);
-        let petId = await orderValue["pet_id"];
+        try {
+            let petId = await orderValue["pet_id"];
 
-        let selectPet = await $("//div[@id='pet_"+petId+"']//a//b")
-        await browser.pause(4000);
-        await selectPet.scrollIntoView();
-        await super.waitTillViewPort(selectPet);
-        await selectPet.waitForClickable();
-        await selectPet.click();
-    }
+            let selectPet = await $("//div[@id='pet_"+petId+"']//a//b")
+            await browser.pause(4000);
+            await selectPet.scrollIntoView();
+            await super.waitTillViewPort(selectPet);
+            await selectPet.waitForClickable();
+            await selectPet.click();
+
+
+        }
+        catch (e){
+            let selectpet = await $("//div[@class='change_pet']//div[1]//a[1]//b[1]");
+            await browser.pause(4000);
+            await selectpet.scrollIntoView();
+            await super.waitTillViewPort(selectpet);
+            await selectpet.waitForClickable();
+            await selectpet.click();
+
+        }
+     }
     async confirmBtn() {
         let confirmElem = await $(ElementOrder.confirmElem);
 

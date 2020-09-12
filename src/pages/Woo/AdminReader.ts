@@ -9,6 +9,9 @@ let jsonOrderPath = './src/Data/Json/updateAdminData.json';
 let omsValue = yaml.safeLoad(
     fs.readFileSync(FilePath.OmsYaml, 'utf8')
 );
+let omsUpdateValue = yaml.safeLoad(
+    fs.readFileSync('./src/Data/Yaml/OMSUpdateData.yml', 'utf8')
+);
 
 class AdminReader extends Page {
     public globalKey:string = "update";
@@ -190,7 +193,7 @@ class AdminReader extends Page {
     //todo shipping
 
     verifyBillingFirstName(value){
-        let yamlExpected = omsValue[value]['billing_firstName'];
+        let yamlExpected = omsUpdateValue[value]['billing_firstName'];
 
         let billingFirstNameElem = $(ElementAdmin.billingfirstNameElem);
         let billingFirstNameText = billingFirstNameElem.getAttribute("value");
@@ -199,7 +202,7 @@ class AdminReader extends Page {
     }
     verifyBillingLastName(value){
 
-        let yamlExpected = omsValue[value]['billing_lastname'];
+        let yamlExpected = omsUpdateValue[value]['billing_lastname'];
 
         let billingLastNameElem = $(ElementAdmin.billingLastNameElem);
         let billingLastNameElemText = billingLastNameElem.getAttribute("value");
@@ -214,7 +217,7 @@ class AdminReader extends Page {
 
 // }
     verifyBillingAddressLine1(value){
-        let yamlExpected = omsValue[value]['billing_address_line1'];
+        let yamlExpected = omsUpdateValue[value]['billing_address_line1'];
 
         let elem = $(ElementAdmin.billingAddressLine1Elem);
         let elemText = elem.getAttribute("value");
@@ -222,7 +225,7 @@ class AdminReader extends Page {
 
     }
     verifyBillingCity(value){
-        let yamlExpected = omsValue[value]['billing_city'];
+        let yamlExpected = omsUpdateValue[value]['billing_city'];
 
         let elem = $(ElementAdmin.billingCityElem);
         let elemText = elem.getAttribute("value");
@@ -230,7 +233,7 @@ class AdminReader extends Page {
 
     }
     verifyBillingAddressLine2(value){
-        let yamlExpected = omsValue[value]['billing_address_line2'];
+        let yamlExpected = omsUpdateValue[value]['billing_address_line2'];
 
         let elem = $(ElementAdmin.billingAddressLine2Elem);
         let elemText = elem.getAttribute("value");
@@ -239,14 +242,14 @@ class AdminReader extends Page {
     }
 
     verifyBillingPostalCode(value){
-        let yamlExpected = omsValue[value]['billing_postal_code'];
+        let yamlExpected = omsUpdateValue[value]['billing_postal_code'];
         let elem = $(ElementAdmin.billingPostcodeZIPElem);
         let elemText = elem.getAttribute("value");
         super.syncVerifyContainElem(elem,elemText,yamlExpected);
 
     }
     verifyBillingCountry(value){
-        let yamlExpected = omsValue[value]['billing_country'];
+        let yamlExpected = omsUpdateValue[value]['billing_country'];
         let regExp = /\(([^)]+)\)/;
         let yamlExpectedSlice = regExp.exec(yamlExpected);
         let elem = $(ElementAdmin.billingSelectCountryElem);
@@ -255,7 +258,7 @@ class AdminReader extends Page {
 
     }
 // verifyBillingCountryState(value){
-//   let yamlExpected = omsValue[value]['billing_state'];
+//   let yamlExpected = omsUpdateValue[value]['billing_state'];
 //   let elem = $(ElementAdmin.billingStateCountryElem);
 //   let elemText = elem.getText();
 //   let global = "key" ;
@@ -266,7 +269,7 @@ class AdminReader extends Page {
 // }
 
     verifyBillingEmailAddress(value){
-        let yamlExpected = omsValue[value]['billing_email'];
+        let yamlExpected = omsUpdateValue[value]['billing_email'];
 
         let elem = $(ElementAdmin.billingEmailAddressElem);
         let elemText = elem.getAttribute("value");
@@ -274,7 +277,7 @@ class AdminReader extends Page {
 
     }
     verifyBillingPhone(value){
-        let yamlExpected = omsValue[value]['billing_phone'];
+        let yamlExpected = omsUpdateValue[value]['billing_phone'];
 
         let elem = $(ElementAdmin.billingPhoneElem);
         let elemText = elem.getAttribute("value");
@@ -289,7 +292,7 @@ class AdminReader extends Page {
 
 
     verifyShippingFirstName(value){
-        let yamlExpected = omsValue[value]['shipping_firstName'];
+        let yamlExpected = omsUpdateValue[value]['shipping_firstName'];
 
         let shippingFirstNameElem = $(ElementAdmin.shippingFirstNameElem);
         let shippingFirstNameText = shippingFirstNameElem.getAttribute("value");
@@ -297,7 +300,7 @@ class AdminReader extends Page {
 
     }
     verifyShippingLastName(value){
-        let yamlExpected = omsValue[value]['shipping_lastname'];
+        let yamlExpected = omsUpdateValue[value]['shipping_lastname'];
 
         let shippingLastNameElem = $(ElementAdmin.shippingLastNameElem);
         let shippingLastNameText = shippingLastNameElem.getAttribute("value");
@@ -306,7 +309,7 @@ class AdminReader extends Page {
 
     }
     verifyShippingAddressLine1(value){
-        let yamlExpected = omsValue[value]['shipping_address_line1'];
+        let yamlExpected = omsUpdateValue[value]['shipping_address_line1'];
 
         let elem = $(ElementAdmin.shippingAddressLine1Elem);
         let elemText = elem.getAttribute("value");
@@ -315,7 +318,7 @@ class AdminReader extends Page {
     }
 
     verifyShippingCity(value){
-        let yamlExpected = omsValue[value]['shipping_city'];
+        let yamlExpected = omsUpdateValue[value]['shipping_city'];
 
         let elem = $(ElementAdmin.shippingCityElem);
         let elemText = elem.getAttribute("value");
@@ -323,7 +326,7 @@ class AdminReader extends Page {
 
     }
     verifyShippingAddressLine2(value){
-        let yamlExpected = omsValue[value]['billing_address_line2'];
+        let yamlExpected = omsUpdateValue[value]['billing_address_line2'];
 
         let elem = $(ElementAdmin.billingAddressLine2Elem);
         let elemText = elem.getAttribute("value");
@@ -332,7 +335,7 @@ class AdminReader extends Page {
     }
 
     verifyShippingPostalCode(value){
-        let yamlExpected = omsValue[value]['shipping_postal_code'];
+        let yamlExpected = omsUpdateValue[value]['shipping_postal_code'];
 
         let elem = $(ElementAdmin.shippingPostcodeZIPElem);
         let elemText = elem.getAttribute("value");
@@ -340,7 +343,7 @@ class AdminReader extends Page {
 
     }
     verifyShippingCountry(value){
-        let yamlExpected = omsValue[value]['shipping_country'];
+        let yamlExpected = omsUpdateValue[value]['shipping_country'];
         console.log("shippingValue",yamlExpected);
         let regExp = /\(([^)]+)\)/;
         let yamlExpectedSlice = regExp.exec(yamlExpected);

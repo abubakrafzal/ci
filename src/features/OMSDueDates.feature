@@ -33,7 +33,7 @@ Feature:TS 5 OMS: Plush Due Dates
 
     Examples:
       | Payment     | Rush    |
-      | Debit       | 2_rush  |
+      | Debit       | 4       |
 
   @Status @Smoke @Due_dates
   Scenario Outline: TS 3 OMS: Updating statuses in OMS reflects back to WooCommerce
@@ -42,7 +42,7 @@ Feature:TS 5 OMS: Plush Due Dates
     Then  User Go to OMS "Orders" from Panel
     Then  User go to selected Order ID
     And   User Select "<Rush>" for the order
-#    When  User hit the OMS Update Button
+    When  User hit the OMS Update Button
     Then  User Go to OMS "Line Items" from Panel
     And   User Go to  Line Item against order
     Then  User Verify Item "<Item Status>" Status
@@ -53,9 +53,9 @@ Feature:TS 5 OMS: Plush Due Dates
 
 
     Examples:
-      | Credential          |  Item Status                          | Rush           |
-      | SuperAdmin          |  Ship from hq to customer expected    | 2 Weeks        |
-      | SuperAdmin          |  Ship from china to hq expected       | 2 Weeks        |
+      | Credential          |  Item Status                          | Rush          |
+      | SuperAdmin          |  Ship from hq to customer expected    | 4             |
+      | SuperAdmin          |  Ship from china to hq expected       | 4             |
 
 
   @Status @Smoke @Request

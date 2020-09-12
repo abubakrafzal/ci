@@ -60,7 +60,7 @@ Then(/^User go to order number (.*) details$/, function(text) {
     adminSyncPage.saveOrderAdminJson2(text)
 });
 When(/^Verify OMS "([^"]*)" from WooCommerce$/, function(text) {
-    adminSyncPage.getWooItemStatus(text);
+    adminSyncPage.getOmsItemStatus(text);
 });
 Then(/^Verify WooAdmin "([^"]*)" from WooCommerce$/, function(text) {
     adminSyncPage.getWooItemStatus(text);

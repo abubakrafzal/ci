@@ -14,10 +14,13 @@ let credentials ="./src/Data/Json/credentials.json";
 let jsonOrderPath = FilePath.ApiJson;
 
 class OMSLinePage extends Page {
-    omsValue = super.syncJsonRead(jsonOrderPath);
+
 
     clickSelectLineItem(value) {
-        let yamlValue = this.omsValue[value]['line_items'][0]['id'];
+       let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlValue = omsValue[value]['line_items'][0]['id'];
+        console.log("Line ID",yamlValue);
         let lineElem = $("//a[contains(text(),'" + yamlValue + "')]");
         super.syncWaitExistAndClick(lineElem);
     }
@@ -123,7 +126,9 @@ class OMSLinePage extends Page {
 
     openWOOAdminStatusChangeOrder(value) {
         let jsonOrder = super.syncJsonRead(credentials);
-        let yamlOrder = this.omsValue[value]["line_items"][0]['id'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlOrder = omsValue[value]["line_items"][0]['id'];
         let selectOrderElem = $(
             "//strong[contains(text(),'" + yamlOrder + "')]"
         );

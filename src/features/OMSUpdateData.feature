@@ -48,5 +48,5 @@ Feature: TS 4 OMS: Update shipping/billing from OMS
     And   User Verify the Shipping "<MetaData>" from WooAdmin
 
     Examples:
-      | Credential | MetaData  | OrderNumber |
-      | SuperAdmin | OrderData | Update      |
+      | Credential | MetaData  |
+      | SuperAdmin | update    |

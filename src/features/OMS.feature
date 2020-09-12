@@ -66,6 +66,8 @@ Feature:TS3,TS4 Updating statuses in OMS reflects back to WooCommerce
     Examples:
       | MetaData  | Credential |
       | OMS       | SuperAdmin |
+
+
   @Smoke @OMS @regression @Employee
   Scenario Outline: TC-12: Verify the plush order is assigned to Plush Manager and status "New Item"
     Given User is on Login Page of OMS
@@ -132,11 +134,13 @@ Feature:TS3,TS4 Updating statuses in OMS reflects back to WooCommerce
     And   User Go to  Line Item "<MetaData>" details
     Then  User Verify Item "<Item Status>" Status
     When  User hit the OMS Update Button
-    Then  User copy the order number
+    Then  User wait for the Line Item Successful Alert
+#    Then  User copy the order number
     And   Close All the tabs except Base
     Given Super User go to Admin Site
     When  User click On Wocommerce from side panel
     Then  User go to Order ID "<MetaData>"
+    And   User hit the Update Button
     And   Verify OMS "<Item Status>" from WooCommerce
     Then  Verify WooAdmin "<Item Status>" from WooCommerce
 

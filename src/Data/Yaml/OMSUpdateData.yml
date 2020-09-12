@@ -12,7 +12,7 @@ update:
   billing_state: Alabama
   shipping_address_line1: 1500 River Shore Drive Updated
   shipping_city: Louisville Updated
-  shipping_country: United Kingdom (UK)
+  shipping_country: GB
   shipping_firstName: erictest
   shipping_lastname: littletontest
   shipping_postal_code: '40206'

@@ -54,11 +54,13 @@ class OMSDueDatesPage extends Page {
         super.syncWaitExistAndClick(lineElem);
     }
     getRushSelectItem(value) {
+        var rushValue = ''+value+' Weeks';
+
         let selectOrder = $(ElementOMSOrder.rushSelectOrderElem);
         selectOrder.scrollIntoView();
         super.syncDisplayTill(selectOrder);
-        selectOrder.selectByVisibleText(value);
-        browser.debug();
+        selectOrder.selectByVisibleText(rushValue);
+
     }
 
     getRushWeeks() {

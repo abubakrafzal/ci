@@ -91,7 +91,8 @@ class OrderSyncPage extends Page {
     }
 
     applyRush(value){
-        let rushElem = $("//label[@for = '"+value+"']");
+        var rushValue = ''+value+'_rush';
+        let rushElem = $("//label[@for = '"+rushValue+"']");
         super.syncDisplayTill(rushElem);
         super.staticWaitAndclick(rushElem);
 

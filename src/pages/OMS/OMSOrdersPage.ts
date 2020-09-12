@@ -13,12 +13,13 @@ let omsUpdateValue = yaml.safeLoad(
 let jsonOrderPath = FilePath.ApiJson;
 
 class OMSOrdersPage extends Page {
-    omsValue = super.syncJsonRead(jsonOrderPath);
+     omsValue = super.syncJsonRead(jsonOrderPath);
 
     clickOrderFromTable(value) {
+        let omsValue = super.syncJsonRead(jsonOrderPath);
 
         let yamlValue2 = this.omsValue[value]['id'];
-
+            console.log("checkkkkkk-========",yamlValue2);
             let orderElem = $("//a[contains(text(),'" + yamlValue2 + "')]");
             super.syncWaitExistAndClick(orderElem);
 
@@ -32,7 +33,9 @@ class OMSOrdersPage extends Page {
     }
 
     getOrderDateCreated(value) {
-        let yamlExpected = this.omsValue[value]['date_created'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['date_created'];
         let extract = yamlExpected.substring(0, 10);
         console.log(extract);
         let orderDateElem = $(ElementOMSOrder.orderDateElem);
@@ -40,7 +43,9 @@ class OMSOrdersPage extends Page {
         super.syncVerifyContainElem(orderDateElem,actualValue,extract);
     }
     getBillingFirstName(value) {
-        let yamlExpected = this.omsValue[value]['billing']['first_name'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['billing']['first_name'];
         console.log(yamlExpected)
         let billingFirstNameElem = $(ElementOMSOrder.billingfirstNameElem);
         let actualValue = billingFirstNameElem.getAttribute('value');
@@ -48,7 +53,9 @@ class OMSOrdersPage extends Page {
 
     }
     getBillingLastName(value) {
-        let yamlExpected = this.omsValue[value]['billing']['last_name'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['billing']['last_name'];
 
         let billingLastNameElem = $(ElementOMSOrder.billinglastNameElem);
         let actualValue = billingLastNameElem.getAttribute('value');
@@ -58,7 +65,9 @@ class OMSOrdersPage extends Page {
     }
 
     getBillingAddressLine1(value) {
-        let yamlExpected = this.omsValue[value]['billing']['address_1'];;
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['billing']['address_1'];;
 
         let elem = $(ElementOMSOrder.billingAddress1Elem);
         let actualValue = elem.getAttribute('value');
@@ -67,7 +76,9 @@ class OMSOrdersPage extends Page {
 
     }
     getBillingCity(value) {
-        let yamlExpected = this.omsValue[value]['billing']['city'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['billing']['city'];
 
         let elem = $(ElementOMSOrder.billingcityElem);
 
@@ -76,7 +87,9 @@ class OMSOrdersPage extends Page {
 
     }
     getBillingAddressLine2(value) {
-        let yamlExpected = this.omsValue[value]['billing']['address_2'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['billing']['address_2'];
 
         let elem = $(ElementOMSOrder.billingAddress2Elem);
         let actualValue = elem.getAttribute('value');
@@ -85,7 +98,9 @@ class OMSOrdersPage extends Page {
     }
 
     getBillingPostalCode(value) {
-        let yamlExpected = this.omsValue[value]['billing']['postcode'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['billing']['postcode'];
 
         let elem = $(ElementOMSOrder.billingpostcodeElem);
         let actualValue = elem.getAttribute('value');
@@ -93,7 +108,9 @@ class OMSOrdersPage extends Page {
 
     }
     getBillingCountry(value) {
-        let yamlExpected = this.omsValue[value]['billing']['country'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['billing']['country'];
         let elem = $(ElementOMSOrder.billingcountryElem);
         let actualValue = elem.getAttribute('value');
         super.syncVerifyContainElem(elem,actualValue,yamlExpected);
@@ -102,14 +119,18 @@ class OMSOrdersPage extends Page {
 
     }
     getBillingCountryState(value) {
-        let yamlExpected = this.omsValue[value]['billing']['state'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['billing']['state'];
         let elem = $(ElementOMSOrder.billingstateElem);
         let actualValue = elem.getAttribute('value');
         super.syncVerifyContainElem(elem,actualValue,yamlExpected);
 
     }
     getBillingEmailAddress(value) {
-        let yamlExpected = this.omsValue[value]['billing']['email'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['billing']['email'];
 
         let elem = $(ElementOMSOrder.billingemailElem);
         let actualValue = elem.getAttribute('value');
@@ -117,7 +138,9 @@ class OMSOrdersPage extends Page {
 
     }
     getBillingPhone(value) {
-        let yamlExpected = this.omsValue[value]['billing']['phone'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['billing']['phone'];
 
         let elem = $(ElementOMSOrder.billingphoneElem);
         let actualValue = elem.getAttribute('value');
@@ -125,7 +148,9 @@ class OMSOrdersPage extends Page {
 
     }
     getBillingPayment(value) {
-        let yamlExpected = this.omsValue[value]['payment_method'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['payment_method'];
 
         let elem = $(ElementOMSOrder.paymentViaElem);
         let actualValue = elem.getAttribute('value');
@@ -139,7 +164,9 @@ class OMSOrdersPage extends Page {
     }
 
     getShippingFirstName(value) {
-        let yamlExpected = this.omsValue[value]['shipping']['first_name'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['shipping']['first_name'];
 
         let shippingFirstNameElem = $(ElementOMSOrder.shippingfirstNameElem);
         let actualValue = shippingFirstNameElem.getAttribute('value');
@@ -147,7 +174,9 @@ class OMSOrdersPage extends Page {
 
     }
     getShippingLastName(value) {
-        let yamlExpected = this.omsValue[value]['shipping']['last_name'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['shipping']['last_name'];
 
         let shippingLastNameElem = $(ElementOMSOrder.shippinglastNameElem);
         let actualValue = shippingLastNameElem.getAttribute('value');
@@ -155,7 +184,9 @@ class OMSOrdersPage extends Page {
 
     }
     getShippingAddressLine1(value) {
-        let yamlExpected = this.omsValue[value]['shipping']['address_1'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['shipping']['address_1'];
 
         let elem = $(ElementOMSOrder.shippingaddress1Elem);
         let actualValue = elem.getAttribute('value');
@@ -163,7 +194,9 @@ class OMSOrdersPage extends Page {
 
     }
     getShippingCity(value) {
-        let yamlExpected = this.omsValue[value]['shipping']['city'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['shipping']['city'];
 
         let elem = $(ElementOMSOrder.shippingcityElem);
         let actualValue = elem.getAttribute('value');
@@ -171,7 +204,9 @@ class OMSOrdersPage extends Page {
 
     }
     getShippingAddressLine2(value) {
-        let yamlExpected = this.omsValue[value]['shipping']['address_2'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['shipping']['address_2'];
 
         let elem = $(ElementOMSOrder.shippingaddress2Elem);;
         let actualValue = elem.getAttribute('value');
@@ -180,7 +215,9 @@ class OMSOrdersPage extends Page {
     }
 
     getShippingPostalCode(value) {
-        let yamlExpected = this.omsValue[value]['shipping']['postcode'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['shipping']['postcode'];
 
         let elem = $(ElementOMSOrder.shippingpostcodeElem);
         let actualValue = elem.getAttribute('value');
@@ -189,7 +226,9 @@ class OMSOrdersPage extends Page {
 
     }
     getShippingCountry(value) {
-        let yamlExpected = this.omsValue[value]['shipping']['country'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['shipping']['country'];
 
         let elem = $(ElementOMSOrder.shippingcountryElem);
         let actualValue = elem.getAttribute('value');
@@ -197,7 +236,9 @@ class OMSOrdersPage extends Page {
 
     }
     getShippingState(value) {
-        let yamlExpected = this.omsValue[value]['shipping']['state'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlExpected = omsValue[value]['shipping']['state'];
         let yamlExpectedSlice = yamlExpected.match(/^.|.$/g).join('').toUpperCase();
 
 
@@ -400,17 +441,15 @@ class OMSOrdersPage extends Page {
     }
     setShippingCountry(value) {
         let yamlExpected = omsUpdateValue[value]['shipping_country'];
-        let regExp = /\(([^)]+)\)/;
-        let yamlExpectedSlice = regExp.exec(yamlExpected);
-        let entervalue = yamlExpectedSlice[1];
+
         let elem = $(ElementOMSOrder.shippingcountryElem);
         elem.clearValue();
         browser.pause(3000);
 
-        super.syncWaitExistAndEnter(elem,entervalue);
+        super.syncWaitExistAndEnter(elem,yamlExpected);
         // browser.debug();
         let actualValue = elem.getAttribute('value');
-        super.syncVerifyContainElem(elem,actualValue,entervalue);
+        super.syncVerifyContainElem(elem,actualValue,yamlExpected);
     }
     setShippingState(value) {
         let yamlExpected = omsUpdateValue[value]['shipping_state'];
