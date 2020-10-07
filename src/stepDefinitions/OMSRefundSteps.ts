@@ -1,6 +1,7 @@
 
 import { Then } from 'cucumber';
 import oMSPartialRefundPage from 'src/pages/OMS/OMSPartialRefundPage';
+import { Given } from 'cucumber'
 
 Then(/^User Save Refund Order ID$/, function() {
     oMSPartialRefundPage.getRushOrderID();
@@ -39,9 +40,12 @@ Then(/^User click new refund Item$/, function() {
 Then(/^User go to line order details Item$/, function() {
     oMSPartialRefundPage.openWOOAdminStatusChangeOrder();
 });
-Then(/^Verify OMS partial "([^"]*)" from WooCommerce$/, function(text) {
-    oMSPartialRefundPage.getWooItemStatus(text);
+
+Given(/^Verify OMS "([^"]*)" partial "([^"]*)" from WooCommerce$/, function(meta,status) {
+    oMSPartialRefundPage.getWooItemStatus(meta,status);
+
 });
-Then(/^Verify WooAdmin partial "([^"]*)" from WooCommerce$/, function(text) {
-    oMSPartialRefundPage.getOmsItemStatus(text);
+Then(/^Verify WooAdmin "([^"]*)" partial "([^"]*)" from WooCommerce$/, function(meta,status) {
+    oMSPartialRefundPage.getOmsItemStatus(meta,status);
+
 });

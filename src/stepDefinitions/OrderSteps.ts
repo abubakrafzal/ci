@@ -34,7 +34,7 @@ Then(/^User select "([^"]*)" Age$/, async text => {
 Then(/^User click on next button$/, async () => {
     await orderPage.confirmBtn();
 });
-When(/^User go to product$/, async () => {
+When(/^User go to product$/,{ wrapperOptions: { retry: 2 } }, async () => {
     await orderPage.clickProductNav();
 });
 When(/^User click on "([^"]*)" item category$/, async text => {

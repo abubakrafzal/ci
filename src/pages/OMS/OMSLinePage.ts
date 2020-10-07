@@ -73,8 +73,6 @@ class OMSLinePage extends Page {
         let assignGroupElem = $(ElementOMSLineItem.lineAssignmentGroupElem);
         let assignGroupText = super.syncWaitExistAndText(assignGroupElem);
 
-
-
         super.syncVerifyContainElem(
             assignGroupElem,
             assignGroupText,
@@ -85,9 +83,11 @@ class OMSLinePage extends Page {
 
     setAssignUser(value) {
         let itemStatusElem = $(ElementOMSLineItem.lineassigendUserElem);
-        itemStatusElem.waitForExist();
-        itemStatusElem.click();
+        browser.pause(5000);
+        super.waitAndclick(itemStatusElem);
+
         let yamlValue = rolesValue[value]['assigned_user'];
+        console.log("Assigned USer:",yamlValue);
 
         try {
             let selectItemElem = $("//li[contains(text(),'" + yamlValue + "')]");
@@ -95,12 +95,11 @@ class OMSLinePage extends Page {
             selectItemElem.scrollIntoView();
             let assignedUserValue =selectItemElem.getText();
             selectItemElem.click();
-
-            let obj = {
-
-            };
-            obj[value] = assignedUserValue;
-            super.syncJSonUpdate(OmsRoles,obj)
+            // let obj = {
+            //
+            // };
+            // obj[value] = assignedUserValue;
+            // super.syncJSonUpdate(OmsRoles,obj)
 
         }
         catch(e) {
@@ -108,11 +107,13 @@ class OMSLinePage extends Page {
             let assignedUserValue =lineAssignedStaticUser.getText();
 
             super.syncWaitExistAndClick(lineAssignedStaticUser);
-            let obj = {
+            // browser.debug();
 
-            };
-            obj[value] = assignedUserValue;
-            super.syncJSonUpdate(OmsRoles,obj)
+            // let obj = {
+            //
+            // };
+            // obj[value] = assignedUserValue;
+            // super.syncJSonUpdate(OmsRoles,obj)
 
         }
     }

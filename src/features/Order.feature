@@ -75,7 +75,7 @@ Feature: TS 1 WOO: Place the order of Different Plush Products
     Given Super User go to Admin Site
     When  User click On Wocommerce from side panel
     And   User go to orders list
-    Then  User go to order "<Order>" details
+    Then  User go to Order ID "<Order>"
     And   User hit the Update Button
     When  User go to Edit the Billing Data
     Then  User get the Values of Billing
@@ -84,16 +84,16 @@ Feature: TS 1 WOO: Place the order of Different Plush Products
 
     Examples:
       | Payment     |  Pet       | Order       |
-      | Debit       |  Pet_dog   | Order_data  |
+      | Debit       |  Pet_dog   | OMS         |
 
 
-  @Smoke @Add_to_cart @regression @WooCommerce
+  @Smoke @Add_to_cart @regression @test
   Scenario Outline: Get data from  Woocommerce Admin Website
 
     Given Super User go to Admin Site
     When  User click On Wocommerce from side panel
     And   User go to orders list
-    Then  User go to order "<Order>" details
+    Then  User go to Order ID "<Order>"
     And   User hit the Update Button
     When  User go to Edit the Billing Data
     Then  User get the Values of Billing
@@ -105,7 +105,7 @@ Feature: TS 1 WOO: Place the order of Different Plush Products
 
     Examples:
              | Order       |
-             | Order_data  |
+             | OMS         |
 
 
 

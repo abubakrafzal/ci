@@ -5,7 +5,8 @@ const {After, Status} = require('cucumber');
 
 After((scenarioResult)=>{
     if (scenarioResult.result.status === Status.FAILED)  {
-        cucumberJson.attach(browser.takeScreenshot(), 'image/png');
+        cucumberJson.attach(browser.
+        takeScreenshot(), 'image/png');
 
     }
     else {

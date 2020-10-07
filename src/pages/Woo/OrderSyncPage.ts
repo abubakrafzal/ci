@@ -15,7 +15,7 @@ let orderValue = yaml.safeLoad(
 let paymentValue = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/Payment.yml', 'utf8')
 );
-let jsonOrderPath ="./src/Data/Json/OrderData.json";
+// let jsonOrderPath ="./src/Data/Json/OrderData.json";
 let testYmlPath = "./src/Data/Yaml/Order.yml";
 class OrderSyncPage extends Page {
     get thanks() {
@@ -92,7 +92,8 @@ class OrderSyncPage extends Page {
 
     applyRush(value){
         var rushValue = ''+value+'_rush';
-        let rushElem = $("//label[@for = '"+rushValue+"']");
+        let rushElem = $('//label[@for = "'+rushValue+'"]');
+        // let rushElem= $("//label[@for = \"'4_rush\'"]")
         super.syncDisplayTill(rushElem);
         super.staticWaitAndclick(rushElem);
 
@@ -100,7 +101,7 @@ class OrderSyncPage extends Page {
 
     saveOrderToJson(){
         let data = {order_num:this.orderIdGlobal};
-        super.syncJSonUpdate(jsonOrderPath,data);
+        // super.syncJSonUpdate(jsonOrderPath,data);
     }
 
     userGotoAccounts(){

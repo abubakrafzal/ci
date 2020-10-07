@@ -46,6 +46,13 @@ const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
             // console.log(...parsed)
             newData ={...parsed, ...obj}
 
+        }
+        else if (parsed[key]) {
+            console.log("else ",[key]);
+            newData = { ...parsed, ...obj };
+
+
+            // newData = { ...parsed[key], ...obj };
 
 
         }

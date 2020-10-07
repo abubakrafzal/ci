@@ -32,7 +32,7 @@ class Helper extends Page {
             let selectOrderElem = $(
                 "//strong[contains(text(),'" + yamlOrder + "')]"
             );
-            selectOrderElem.waitForClickable();
+                selectOrderElem.waitForClickable();
             selectOrderElem.click();
         }
         catch (e){

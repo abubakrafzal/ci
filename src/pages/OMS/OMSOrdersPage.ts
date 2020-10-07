@@ -13,12 +13,12 @@ let omsUpdateValue = yaml.safeLoad(
 let jsonOrderPath = FilePath.ApiJson;
 
 class OMSOrdersPage extends Page {
-     omsValue = super.syncJsonRead(jsonOrderPath);
+     // omsValue = super.syncJsonRead(jsonOrderPath);
 
     clickOrderFromTable(value) {
         let omsValue = super.syncJsonRead(jsonOrderPath);
 
-        let yamlValue2 = this.omsValue[value]['id'];
+        let yamlValue2 = omsValue[value]['id'];
             console.log("checkkkkkk-========",yamlValue2);
             let orderElem = $("//a[contains(text(),'" + yamlValue2 + "')]");
             super.syncWaitExistAndClick(orderElem);

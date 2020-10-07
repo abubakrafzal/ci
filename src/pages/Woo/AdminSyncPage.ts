@@ -32,7 +32,7 @@ let testYmlPath = './src/Data/Yaml/OMSData.yml';
 let staticYmlPath = './src/Data/Yaml/StaticOms.yml';
 
 class AdminSyncPage extends Page {
-    jsonReader = super.syncJsonRead(jsonOrderPath);
+    // jsonReader = super.syncJsonRead(jsonOrderPath);
 
     syncWooAdminURL() {
         try {
@@ -63,7 +63,7 @@ class AdminSyncPage extends Page {
     openAppliedOrder(value) {
         try{
         let jsonOrder = super.syncJsonRead(jsonOrderPath);
-        let yamlOrder = jsonOrder['order_num'];
+        let yamlOrder = jsonOrder[value]['order_num'];
         let selectOrderElem = $(
             "//strong[contains(text(),'" + yamlOrder + "')]"
         );
@@ -268,8 +268,10 @@ class AdminSyncPage extends Page {
     }
 
     omsOrderItem(value){
+       let jsonReader = super.syncJsonRead(jsonOrderPath);
 
-        let orderValue  = this.jsonReader[value]['id'];
+        let orderValue  = jsonReader[value]['id'];
+
         let orderStatic = $("//a[contains(text(),'"+orderValue+"')]");
         orderStatic.waitForExist();
         orderStatic.scrollIntoView();

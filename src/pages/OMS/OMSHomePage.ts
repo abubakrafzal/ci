@@ -19,8 +19,10 @@ class OMSHomePage extends Page {
         browser.newWindow(OMS_URL);
         expect(OMS_URL).toContain(browser.getUrl());
     }
+
     loginToOMS(value) {
         try {
+
             let username = credentials[value]['username'];
             let password = credentials[value]['password'];
             let usernameElem = $(ElementOMSHome.usernameElem);
@@ -35,11 +37,25 @@ class OMSHomePage extends Page {
             console.log('User Already logged in');
         }
     }
+    loginCheckOMS(value) {
+        let loggedSuccess = $(ElementOMSHome.loggedInMsg);
+        let alreadyLogged = $(ElementOMSHome.alreadyLoggedInMsg);
+        browser.pause(3000);
+        if (!alreadyLogged.isExisting()){
+            this.loginToOMS(value)
+
+        }
+        else {
+            console.log('User already logged in');
+        }
+
+    }
     clickGenericFromPanel(value) {
         let elem = $("//a[contains(text(),'" + value + "')]");
         elem.waitForExist();
         elem.waitForClickable();
         elem.click();
+        browser.pause(5000);
         // super.syncWaitExistAndClick(elem);
 
     }

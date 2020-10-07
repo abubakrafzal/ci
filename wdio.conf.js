@@ -66,11 +66,11 @@ const capabilities = debug
               },
           },
           // {
-          //     maxInstances: 5,
+          //     maxInstances: 1,
           //     browserName: 'firefox',
           //     'moz:firefoxOptions': {
           //         // flag to activate Firefox headless mode (see https://github.com/mozilla/geckodriver/blob/master/README.md#firefox-capabilities for more details about moz:firefoxOptions)
-          //         args: ['-headless'],
+          //         // args: ['-headless'],
           //     },
           // },
       ];
@@ -201,11 +201,14 @@ exports.config = {
             installArgs: {
                 drivers: {
                     chrome: { version: '85.0.4183.83' },
+                    // firefox: { version: '0.27.0' }
+
                 }
             },
             args: {
                 drivers: {
                     chrome: { version: '85.0.4183.83' },
+                    // firefox: { version: '0.27.0' }
                 }
             },
         }
@@ -279,8 +282,7 @@ exports.config = {
         timeout: stepTimout, // <number> timeout for step definitions
         ignoreUndefinedDefinitions: false, // <boolean> Enable this config to treat undefined definitions as warnings
         requireModule: [
-            // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
-            'tsconfig-paths/register',    
+            'tsconfig-paths/register',
         ],
         require: ['./src/stepDefinitions/*.ts', './src/support/*.js'], // <string[]> (file/dir) require files before executing features
     },

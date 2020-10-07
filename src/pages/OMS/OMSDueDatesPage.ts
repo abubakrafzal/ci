@@ -4,6 +4,7 @@ import {
     ElementOMSOrder,
     ElementOrder,
 } from 'src/pages/elements/Elements';
+import { FilePath } from 'src/pages/elements/FilePath';
 
 const yaml = require('js-yaml');
 const fs = require('fs');
@@ -21,6 +22,8 @@ let calendarValue = yaml.safeLoad(
 );
 
 let dueDates = './src/Data/Json/dueDates.json';
+let jsonOrderPath = FilePath.ApiJson;
+
 let globalRush;
 let orderDate;
 class OMSDueDatesPage extends Page {
@@ -29,7 +32,6 @@ class OMSDueDatesPage extends Page {
         super.syncDisplayTill(orderIdElem);
         let orderIdElemText = orderIdElem.getText();
         let orderText = super.SplitNumbers(orderIdElemText);
-        super.syncJSonUpdate(dueDates, { order_num: orderText });
     }
     clickOrderFromTable() {
         let jsonOrder = super.syncJsonRead(dueDates);
@@ -42,10 +44,10 @@ class OMSDueDatesPage extends Page {
         console.log(x[0]);
 
         let lineItemelem = $("//td[@class='col col-item_number']//a");
-        let lineItemText = lineItemelem.getText();
+        // let lineItemText = lineItemelem.getText();
 
-        super.syncJSonUpdate(dueDates, { line_item: lineItemText });
-        super.syncJSonUpdate(dueDates, { order_created_date: x[0] });
+        // super.syncJSonUpdate(dueDates, { line_item: lineItemText });
+        // super.syncJSonUpdate(dueDates, { order_created_date: x[0] });
     }
     clickSelectLineItemDue() {
         let jsonOrder = super.syncJsonRead(dueDates);
@@ -54,11 +56,10 @@ class OMSDueDatesPage extends Page {
         super.syncWaitExistAndClick(lineElem);
     }
     getRushSelectItem(value) {
-        var rushValue = ''+value+' Weeks';
+        let rushValue = ''+value+' Weeks';
 
         let selectOrder = $(ElementOMSOrder.rushSelectOrderElem);
-        selectOrder.scrollIntoView();
-        super.syncDisplayTill(selectOrder);
+        selectOrder.waitForExist();
         selectOrder.selectByVisibleText(rushValue);
 
     }
@@ -79,8 +80,10 @@ class OMSDueDatesPage extends Page {
         super.syncWaitExistAndClick(elem);
     }
     chineseHolidays(value) {
-        let jsonOrder = super.syncJsonRead(dueDates);
-        let yamlDate = jsonOrder['order_created_date'];
+        // let yamlDate = jsonOrder['order_created_date'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlDate = omsValue['OrderDate']['date_created'];
         let substract = value - 1;
 
         let chinese_holidays = calendarValue['calendar2020'];
@@ -96,8 +99,11 @@ class OMSDueDatesPage extends Page {
     }
 
     addDates(value) {
-        let jsonOrder = super.syncJsonRead(dueDates);
-        let yamlDate: number = jsonOrder['order_created_date'];
+        // let jsonOrder = super.syncJsonRead(dueDates);
+        // let yamlDate: number = jsonOrder['order_created_date'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+
+        let yamlDate = omsValue['OrderDate']['date_created'];
         let substract = value - 1;
         return moment(yamlDate, 'YYYY-MM-DD')
             .add('days', substract)

@@ -7,7 +7,7 @@ Given(/^User is on Login Page of OMS$/, function() {
     omsHomePage.newWindowOMS()
 });
 When(/^User Login With "([^"]*)" Username and Password$/, function(text) {
-    omsHomePage.loginToOMS(text);
+    omsHomePage.loginCheckOMS(text);
 });
 Then(/^User Go to OMS Order from Panel$/, function() {
     omsHomePage.clickOrderFromPanel();

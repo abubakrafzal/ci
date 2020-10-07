@@ -6,7 +6,7 @@ OrderData:
       customer:
         - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/customers/421015'
       self:
-        - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/orders/533438'
+        - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/orders/534075'
     billing:
       address_1: 969 Market
       address_2: ''
@@ -30,29 +30,29 @@ OrderData:
     customer_user_agent: ''
     date_completed: null
     date_completed_gmt: null
-    date_created: '2020-09-09T17:49:15'
-    date_created_gmt: '2020-09-09T21:49:15'
-    date_modified: '2020-09-09T17:49:16'
-    date_modified_gmt: '2020-09-09T21:49:16'
-    date_paid: '2020-09-09T17:49:16'
-    date_paid_gmt: '2020-09-09T21:49:16'
+    date_created: '2020-10-05T04:32:24'
+    date_created_gmt: '2020-10-05T08:32:24'
+    date_modified: '2020-10-05T04:32:25'
+    date_modified_gmt: '2020-10-05T08:32:25'
+    date_paid: '2020-10-05T04:32:25'
+    date_paid_gmt: '2020-10-05T08:32:25'
     discount_tax: '0.00'
     discount_total: '0.00'
     fee_lines: []
-    id: 533438
+    id: 534075
     line_items:
-      - id: 457175
+      - id: 458174
         meta_data:
-          - id: 3979138
+          - id: 3992445
             key: pa_mouth-position
             value: closed-with-tongue
-          - id: 3979139
+          - id: 3992446
             key: pa_size
             value: small
-          - id: 3979140
+          - id: 3992447
             key: Pet ID
             value: '10'
-          - id: 3979141
+          - id: 3992448
             key: Pet Profile
             value: >-
               Test<br/><b>Species: </b>Dog (German Shepherd)<br/><br/><b>Left
@@ -60,11 +60,11 @@ OrderData:
               Ear:</b> Up<br/><b>Right Ear:</b> Up<br/><b>Characteristic 1:</b>
               test<br/><b>Characteristic 2:</b> Test<br/><b>Characteristic
               3:</b> Ekekdn<br/><b>Age: </b>2 Years Old<br/>
-          - id: 3979142
+          - id: 3992449
             key: cs_logs
             value: >-
-              a:4:{i:0;a:3:{s:9:"timestamp";s:19:"2020-09-09
-              21:49:16";s:7:"message";s:25:"System created cron
+              a:4:{i:0;a:3:{s:9:"timestamp";s:19:"2020-10-05
+              08:32:25";s:7:"message";s:25:"System created cron
               entry";s:4:"type";s:4:"info";}i:1;a:3:{s:9:"timestamp";s:19:"2020-08-21
               13:15:31";s:7:"message";s:165:"System uploaded folder on /Cuddle
               Clones Share (Team Folder)/Website & Development/Sync
@@ -76,16 +76,16 @@ OrderData:
               server";s:4:"type";s:4:"info";}i:3;a:3:{s:9:"timestamp";s:19:"2020-08-21
               13:00:27";s:7:"message";s:25:"System created cron
               entry";s:4:"type";s:4:"info";}}
-          - id: 3979143
+          - id: 3992450
             key: item_status
             value: New Item
-          - id: 3979144
+          - id: 3992451
             key: item_status_internal
             value: In Progress
-          - id: 3979145
+          - id: 3992452
             key: item_status_external
             value: In Progress
-          - id: 3979146
+          - id: 3992472
             key: Zipper Pouch (&#36;20)
             value: Not Included
         name: Plush Slippers
@@ -100,16 +100,69 @@ OrderData:
         total: '199.00'
         total_tax: '0.00'
         variation_id: 14029
+      - id: 458175
+        meta_data:
+          - id: 3992462
+            key: pa_mouth-position
+            value: closed-with-tongue
+          - id: 3992463
+            key: pa_position
+            value: lying-down
+          - id: 3992464
+            key: pa_size
+            value: regular
+          - id: 3992465
+            key: Pet ID
+            value: '281294'
+          - id: 3992466
+            key: Pet Profile
+            value: >-
+              automationpet<br/><b>Species: </b>Dog (Akita)<br/><br/><b>Left
+              Eye:</b> Blue<br/><b>Right Eye:</b> Blue<br/><b>Left Ear:</b>
+              Up<br/><b>Right Ear:</b> Up<br/><b>Tail:</b> Down<br/><b>Age:
+              </b>Less than 1 year old<br/>
+          - id: 3992467
+            key: cs_logs
+            value: >-
+              a:2:{i:0;a:3:{s:9:"timestamp";s:19:"2020-10-05
+              08:32:25";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}i:1;a:3:{s:9:"timestamp";s:19:"2020-09-20
+              23:16:58";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}}
+          - id: 3992468
+            key: item_status
+            value: New Item
+          - id: 3992469
+            key: item_status_internal
+            value: In Progress
+          - id: 3992470
+            key: item_status_external
+            value: In Progress
+          - id: 3992471
+            key: Zipper Pouch (&#36;20)
+            value: Not Included
+        name: The Original Plush Cuddle Clone
+        price: 249
+        product_id: 205
+        quantity: 1
+        sku: '00001'
+        subtotal: '249.00'
+        subtotal_tax: '0.00'
+        tax_class: ''
+        taxes: []
+        total: '249.00'
+        total_tax: '0.00'
+        variation_id: 0
     meta_data:
-      - id: 15709309
+      - id: 15737387
         key: _last_status
         value: pending
-      - id: 15709310
+      - id: 15737388
         key: _status_history
         value:
           - processing
-    number: '533438'
-    order_key: wc_order_rC0sUVFJWxBhm
+    number: '534075'
+    order_key: wc_order_S2Wl7KZBmuUAe
     parent_id: 0
     payment_method: bacs
     payment_method_title: Direct Bank Transfer
@@ -130,29 +183,404 @@ OrderData:
     shipping_total: '0.00'
     status: processing
     tax_lines: []
-    total: '199.00'
+    total: '448.00'
     total_tax: '0.00'
     transaction_id: ''
     version: 4.2.0
-  billing_address_line1: time square
+  OrderDate:
+    _links:
+      collection:
+        - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/orders'
+      customer:
+        - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/customers/421015'
+      self:
+        - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/orders/534071'
+    billing:
+      address_1: 969 Market
+      address_2: ''
+      city: San Francisco
+      company: ''
+      country: US
+      email: aaron.hall@square63.com
+      first_name: Aaron
+      last_name: Hall
+      phone: '03331234567'
+      postcode: '94103'
+      state: CA
+    cart_hash: ''
+    cart_tax: '0.00'
+    coupon_lines: []
+    created_via: rest-api
+    currency: USD
+    customer_id: 421015
+    customer_ip_address: ''
+    customer_note: ''
+    customer_user_agent: ''
+    date_completed: null
+    date_completed_gmt: null
+    date_created: '2020-10-05T04:23:12'
+    date_created_gmt: '2020-10-05T08:23:12'
+    date_modified: '2020-10-05T04:23:13'
+    date_modified_gmt: '2020-10-05T08:23:13'
+    date_paid: '2020-10-05T04:23:13'
+    date_paid_gmt: '2020-10-05T08:23:13'
+    discount_tax: '0.00'
+    discount_total: '0.00'
+    fee_lines: []
+    id: 534071
+    line_items:
+      - id: 458168
+        meta_data:
+          - id: 3992347
+            key: pa_mouth-position
+            value: closed-with-tongue
+          - id: 3992348
+            key: pa_size
+            value: small
+          - id: 3992349
+            key: Pet ID
+            value: '10'
+          - id: 3992350
+            key: Pet Profile
+            value: >-
+              Test<br/><b>Species: </b>Dog (German Shepherd)<br/><br/><b>Left
+              Eye:</b> Dark Brown<br/><b>Right Eye:</b> Dark Brown<br/><b>Left
+              Ear:</b> Up<br/><b>Right Ear:</b> Up<br/><b>Characteristic 1:</b>
+              test<br/><b>Characteristic 2:</b> Test<br/><b>Characteristic
+              3:</b> Ekekdn<br/><b>Age: </b>2 Years Old<br/>
+          - id: 3992351
+            key: cs_logs
+            value: >-
+              a:4:{i:0;a:3:{s:9:"timestamp";s:19:"2020-10-05
+              08:23:13";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}i:1;a:3:{s:9:"timestamp";s:19:"2020-08-21
+              13:15:31";s:7:"message";s:165:"System uploaded folder on /Cuddle
+              Clones Share (Team Folder)/Website & Development/Sync
+              Development/QA/China/Plush Orders/Open Orders/532835 - Slippers -
+              Test -
+              Dog/";s:4:"type";s:4:"info";}i:2;a:3:{s:9:"timestamp";s:19:"2020-08-21
+              13:10:04";s:7:"message";s:65:"System created folder 532835 -
+              Slippers - Test - Dog on CC
+              server";s:4:"type";s:4:"info";}i:3;a:3:{s:9:"timestamp";s:19:"2020-08-21
+              13:00:27";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}}
+          - id: 3992352
+            key: item_status
+            value: New Item
+          - id: 3992353
+            key: item_status_internal
+            value: In Progress
+          - id: 3992354
+            key: item_status_external
+            value: In Progress
+          - id: 3992374
+            key: Zipper Pouch (&#36;20)
+            value: Not Included
+        name: Plush Slippers
+        price: 199
+        product_id: 2177
+        quantity: 1
+        sku: ''
+        subtotal: '199.00'
+        subtotal_tax: '0.00'
+        tax_class: ''
+        taxes: []
+        total: '199.00'
+        total_tax: '0.00'
+        variation_id: 14029
+      - id: 458169
+        meta_data:
+          - id: 3992364
+            key: pa_mouth-position
+            value: closed-with-tongue
+          - id: 3992365
+            key: pa_position
+            value: lying-down
+          - id: 3992366
+            key: pa_size
+            value: regular
+          - id: 3992367
+            key: Pet ID
+            value: '281294'
+          - id: 3992368
+            key: Pet Profile
+            value: >-
+              automationpet<br/><b>Species: </b>Dog (Akita)<br/><br/><b>Left
+              Eye:</b> Blue<br/><b>Right Eye:</b> Blue<br/><b>Left Ear:</b>
+              Up<br/><b>Right Ear:</b> Up<br/><b>Tail:</b> Down<br/><b>Age:
+              </b>Less than 1 year old<br/>
+          - id: 3992369
+            key: cs_logs
+            value: >-
+              a:2:{i:0;a:3:{s:9:"timestamp";s:19:"2020-10-05
+              08:23:13";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}i:1;a:3:{s:9:"timestamp";s:19:"2020-09-20
+              23:16:58";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}}
+          - id: 3992370
+            key: item_status
+            value: New Item
+          - id: 3992371
+            key: item_status_internal
+            value: In Progress
+          - id: 3992372
+            key: item_status_external
+            value: In Progress
+          - id: 3992373
+            key: Zipper Pouch (&#36;20)
+            value: Not Included
+        name: The Original Plush Cuddle Clone
+        price: 249
+        product_id: 205
+        quantity: 1
+        sku: '00001'
+        subtotal: '249.00'
+        subtotal_tax: '0.00'
+        tax_class: ''
+        taxes: []
+        total: '249.00'
+        total_tax: '0.00'
+        variation_id: 0
+    meta_data:
+      - id: 15737271
+        key: _last_status
+        value: pending
+      - id: 15737272
+        key: _status_history
+        value:
+          - processing
+    number: '534071'
+    order_key: wc_order_J7GgIX327AB4g
+    parent_id: 0
+    payment_method: bacs
+    payment_method_title: Direct Bank Transfer
+    prices_include_tax: false
+    refunds: []
+    shipping:
+      address_1: 969 Market
+      address_2: ''
+      city: San Francisco
+      company: ''
+      country: US
+      first_name: Aaron
+      last_name: Hall
+      postcode: '94103'
+      state: CA
+    shipping_lines: []
+    shipping_tax: '0.00'
+    shipping_total: '0.00'
+    status: processing
+    tax_lines: []
+    total: '448.00'
+    total_tax: '0.00'
+    transaction_id: ''
+    version: 4.2.0
+  Refund:
+    _links:
+      collection:
+        - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/orders'
+      customer:
+        - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/customers/421015'
+      self:
+        - href: 'https://qa.cuddleclones.com/wp-json/wc/v3/orders/534072'
+    billing:
+      address_1: 969 Market
+      address_2: ''
+      city: San Francisco
+      company: ''
+      country: US
+      email: aaron.hall@square63.com
+      first_name: Aaron
+      last_name: Hall
+      phone: '03331234567'
+      postcode: '94103'
+      state: CA
+    cart_hash: ''
+    cart_tax: '0.00'
+    coupon_lines: []
+    created_via: rest-api
+    currency: USD
+    customer_id: 421015
+    customer_ip_address: ''
+    customer_note: ''
+    customer_user_agent: ''
+    date_completed: null
+    date_completed_gmt: null
+    date_created: '2020-10-05T04:26:00'
+    date_created_gmt: '2020-10-05T08:26:00'
+    date_modified: '2020-10-05T04:26:01'
+    date_modified_gmt: '2020-10-05T08:26:01'
+    date_paid: '2020-10-05T04:26:01'
+    date_paid_gmt: '2020-10-05T08:26:01'
+    discount_tax: '0.00'
+    discount_total: '0.00'
+    fee_lines: []
+    id: 534072
+    line_items:
+      - id: 458171
+        meta_data:
+          - id: 3992394
+            key: pa_mouth-position
+            value: closed-with-tongue
+          - id: 3992395
+            key: pa_size
+            value: small
+          - id: 3992396
+            key: Pet ID
+            value: '10'
+          - id: 3992397
+            key: Pet Profile
+            value: >-
+              Test<br/><b>Species: </b>Dog (German Shepherd)<br/><br/><b>Left
+              Eye:</b> Dark Brown<br/><b>Right Eye:</b> Dark Brown<br/><b>Left
+              Ear:</b> Up<br/><b>Right Ear:</b> Up<br/><b>Characteristic 1:</b>
+              test<br/><b>Characteristic 2:</b> Test<br/><b>Characteristic
+              3:</b> Ekekdn<br/><b>Age: </b>2 Years Old<br/>
+          - id: 3992398
+            key: cs_logs
+            value: >-
+              a:4:{i:0;a:3:{s:9:"timestamp";s:19:"2020-10-05
+              08:26:01";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}i:1;a:3:{s:9:"timestamp";s:19:"2020-08-21
+              13:15:31";s:7:"message";s:165:"System uploaded folder on /Cuddle
+              Clones Share (Team Folder)/Website & Development/Sync
+              Development/QA/China/Plush Orders/Open Orders/532835 - Slippers -
+              Test -
+              Dog/";s:4:"type";s:4:"info";}i:2;a:3:{s:9:"timestamp";s:19:"2020-08-21
+              13:10:04";s:7:"message";s:65:"System created folder 532835 -
+              Slippers - Test - Dog on CC
+              server";s:4:"type";s:4:"info";}i:3;a:3:{s:9:"timestamp";s:19:"2020-08-21
+              13:00:27";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}}
+          - id: 3992399
+            key: item_status
+            value: New Item
+          - id: 3992400
+            key: item_status_internal
+            value: In Progress
+          - id: 3992401
+            key: item_status_external
+            value: In Progress
+          - id: 3992421
+            key: Zipper Pouch (&#36;20)
+            value: Not Included
+        name: Plush Slippers
+        price: 199
+        product_id: 2177
+        quantity: 1
+        sku: ''
+        subtotal: '199.00'
+        subtotal_tax: '0.00'
+        tax_class: ''
+        taxes: []
+        total: '199.00'
+        total_tax: '0.00'
+        variation_id: 14029
+      - id: 458172
+        meta_data:
+          - id: 3992411
+            key: pa_mouth-position
+            value: closed-with-tongue
+          - id: 3992412
+            key: pa_position
+            value: lying-down
+          - id: 3992413
+            key: pa_size
+            value: regular
+          - id: 3992414
+            key: Pet ID
+            value: '281294'
+          - id: 3992415
+            key: Pet Profile
+            value: >-
+              automationpet<br/><b>Species: </b>Dog (Akita)<br/><br/><b>Left
+              Eye:</b> Blue<br/><b>Right Eye:</b> Blue<br/><b>Left Ear:</b>
+              Up<br/><b>Right Ear:</b> Up<br/><b>Tail:</b> Down<br/><b>Age:
+              </b>Less than 1 year old<br/>
+          - id: 3992416
+            key: cs_logs
+            value: >-
+              a:2:{i:0;a:3:{s:9:"timestamp";s:19:"2020-10-05
+              08:26:01";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}i:1;a:3:{s:9:"timestamp";s:19:"2020-09-20
+              23:16:58";s:7:"message";s:25:"System created cron
+              entry";s:4:"type";s:4:"info";}}
+          - id: 3992417
+            key: item_status
+            value: New Item
+          - id: 3992418
+            key: item_status_internal
+            value: In Progress
+          - id: 3992419
+            key: item_status_external
+            value: In Progress
+          - id: 3992420
+            key: Zipper Pouch (&#36;20)
+            value: Not Included
+        name: The Original Plush Cuddle Clone
+        price: 249
+        product_id: 205
+        quantity: 1
+        sku: '00001'
+        subtotal: '249.00'
+        subtotal_tax: '0.00'
+        tax_class: ''
+        taxes: []
+        total: '249.00'
+        total_tax: '0.00'
+        variation_id: 0
+    meta_data:
+      - id: 15737316
+        key: _last_status
+        value: pending
+      - id: 15737317
+        key: _status_history
+        value:
+          - processing
+    number: '534072'
+    order_key: wc_order_S4BenZFKyypsS
+    parent_id: 0
+    payment_method: bacs
+    payment_method_title: Direct Bank Transfer
+    prices_include_tax: false
+    refunds: []
+    shipping:
+      address_1: 969 Market
+      address_2: ''
+      city: San Francisco
+      company: ''
+      country: US
+      first_name: Aaron
+      last_name: Hall
+      postcode: '94103'
+      state: CA
+    shipping_lines: []
+    shipping_tax: '0.00'
+    shipping_total: '0.00'
+    status: processing
+    tax_lines: []
+    total: '448.00'
+    total_tax: '0.00'
+    transaction_id: ''
+    version: 4.2.0
+  billing_address_line1: 969 Market
   billing_address_line2: ''
-  billing_city: Lahore
-  billing_company: Square
-  billing_country: Pakistan
-  billing_email: Aaron.hall@square63.org
+  billing_city: San Francisco
+  billing_company: ''
+  billing_country: United States (US)
+  billing_email: aaron.hall@square63.com
   billing_firstName: Aaron
   billing_lastname: Hall
   billing_phone: '03331234567'
-  billing_postal_code: '54000'
-  billing_state: Punjab
-  billing_transaction: ch_1HPbEeHeGtzx7vqFTGvLKoFW
-  line_item: '457180'
-  order_created_date: '2020-09-09'
-  order_num: '533441'
-  shipping_address_line1: time square
-  shipping_city: Lahore
-  shipping_country: Pakistan
+  billing_postal_code: '94103'
+  billing_state: California
+  billing_transaction: ''
+  line_item: '458174'
+  order_created_date: '2020-10-05'
+  shipping_address_line1: 969 Market
+  shipping_city: San Francisco
+  shipping_country: United States (US)
   shipping_firstName: Aaron
   shipping_lastname: Hall
-  shipping_postal_code: '54000'
-  shipping_state: Punjab
+  shipping_postal_code: '94103'
+  shipping_state: California

@@ -1,4 +1,4 @@
-export const data={
+export const data = {
     payment_method: "bacs",
     payment_method_title: "Direct Bank Transfer",
     set_paid: true,
@@ -89,6 +89,73 @@ export const data={
                 }
             ],
             price: 199
-        }
+        },
+        {
+            name: "The Original Plush Cuddle Clone",
+            product_id: 205,
+            variation_id: 1471,
+            quantity: 1,
+            tax_class: "",
+            subtotal: "249.00",
+            subtotal_tax: "0.00",
+            total: "249.00",
+            total_tax: "0.00",
+            taxes: [],
+            meta_data: [
+                {
+                    id: 3985747,
+                    key: "pa_mouth-position",
+                    value: "closed-with-tongue"
+                },
+                {
+                    id: 3985748,
+                    key: "pa_position",
+                    value: "lying-down"
+                },
+                {
+                    id: 3985749,
+                    key: "pa_size",
+                    value: "regular"
+                },
+                {
+                    id: 3985750,
+                    key: "Pet ID",
+                    value: "281294"
+                },
+                {
+                    id: 3985751,
+                    key: "Pet Profile",
+                    value: "automationpet<br/><b>Species: </b>Dog (Akita)<br/><br/><b>Left Eye:</b> Blue<br/><b>Right Eye:</b> Blue<br/><b>Left Ear:</b> Up<br/><b>Right Ear:</b> Up<br/><b>Tail:</b> Down<br/><b>Age: </b>Less than 1 year old<br/>"
+                },
+                {
+                    id: 3985779,
+                    key: "cs_logs",
+                    value: "a:1:{i:0;a:3:{s:9:\"timestamp\";s:19:\"2020-09-20 23:16:58\";s:7:\"message\";s:25:\"System created cron entry\";s:4:\"type\";s:4:\"info\";}}"
+                },
+                {
+                    id: 3985781,
+                    key: "item_status",
+                    value: "New Item"
+                },
+                {
+                    id: 3985782,
+                    key: "item_status_internal",
+                    value: "In Progress"
+                },
+                {
+                    id: 3985783,
+                    key: "item_status_external",
+                    value: "In Progress"
+                },
+                {
+                    id: 3985790,
+                    key: "Zipper Pouch (&#36;20)",
+                    value: "Not Included"
+                }
+            ],
+            sku: "00001",
+            price: 249
+        },
+
     ],
 }

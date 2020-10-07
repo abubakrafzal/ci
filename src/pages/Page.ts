@@ -193,7 +193,17 @@ export default class Page {
         if (!parsed[key]) {
             console.log("if");
             newData = { ...parsed, ...object };
-        } else {
+        }
+        else if (parsed[key]) {
+            console.log("else ",[key]);
+            newData = { ...parsed, ...object };
+
+
+            // newData = { ...parsed[key], ...obj };
+
+
+        }
+        else {
             console.log()
             let data = { ...parsed[key], ...object[key] };
             console.log(data)
@@ -204,6 +214,17 @@ export default class Page {
     syncJsonRead(jsonFile) {
         let response = fs.readFileSync(jsonFile, 'utf8');
         return JSON.parse(response);
+        // return new Promise(function(resolve, reject){
+        //     fs.readFile(jsonFile, 'utf8', (err, data) => {
+        //         err ? reject(err) : resolve(data);
+        //         console.log(data)
+        //     });
+        // });
+
+    }
+
+    syncReadKeyValue(){
+
     }
     async asyncJsonRead(jsonFile) {
         try {

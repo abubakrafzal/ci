@@ -1,5 +1,6 @@
 import Page from 'src/pages/Page';
 import { ElementAdmin, ElementOMSLineItem, ElementOrder } from 'src/pages/elements/Elements';
+import { FilePath } from 'src/pages/elements/FilePath';
 
 const yaml = require('js-yaml');
 const fs = require('fs');
@@ -13,7 +14,7 @@ let rolesValue = yaml.safeLoad(
     fs.readFileSync('./src/Data/Yaml/Roles.yml', 'utf8')
 );
 let refund = './src/Data/Json/refundData.json';
-let globalLineItem;
+let jsonOrderPath = FilePath.ApiJson;
 class OMSPartialRefundPage extends Page {
 
     getRushOrderID() {
@@ -44,11 +45,14 @@ class OMSPartialRefundPage extends Page {
     }
 
     clickSelectLineItemDue() {
-        let jsonOrder = super.syncJsonRead(refund);
-        let yamlItem = jsonOrder['line_item'];
-        globalLineItem =yamlItem;
-        let lineElem = $("//a[contains(text(),'" + yamlItem + "')]");
-        super.syncWaitExistAndClick(lineElem);
+        // let jsonOrder = super.syncJsonRead(refund);
+        // let omsValue = super.syncJsonRead(jsonOrderPath);
+        // let lineID = omsValue[value]['line_items'][0]['id'];
+        //
+        // let yamlItem = jsonOrder['line_item'];
+        // globalLineItem =yamlItem;
+        // let lineElem = $("//a[contains(text(),'" + yamlItem + "')]");
+        // super.syncWaitExistAndClick(lineElem);
     }
     clickSelect2ndLineITemDue(){
         let jsonOrder = super.syncJsonRead(refund);
@@ -153,20 +157,26 @@ class OMSPartialRefundPage extends Page {
         selectOrderElem.waitForClickable();
         selectOrderElem.click();
     }
-    getOmsItemStatus(value){
-        let yamlValue = rolesValue[value]['oms_status'];
 
-        let elem = $("//tbody[@id='order_line_items']/tr[@data-order_item_id ='"+globalLineItem+"']//table[@class='display_meta']//th[.='Item Status (OMS):']//following-sibling::td");
+    getOmsItemStatus(key,value){
+        let yamlValue = rolesValue[value]['oms_status'];
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+        let lineID = omsValue[key]['line_items'][0]['id'];
+
+        let elem = $("//tbody[@id='order_line_items']/tr[@data-order_item_id ='"+lineID+"']//table[@class='display_meta']//th[.='Item Status (OMS):']//following-sibling::td");
         let elemText = elem.getText();
 
         super.syncVerifyContainElem(elem,elemText,yamlValue);
 
     }
 
-    getWooItemStatus(value){
+    getWooItemStatus(key,value){
+        let omsValue = super.syncJsonRead(jsonOrderPath);
+        let lineID = omsValue[key]['line_items'][0]['id'];
+
         let yamlValue = rolesValue[value]['woo_status'];
 
-        let elem = $("//tbody[@id='order_line_items']/tr[@data-order_item_id ='"+globalLineItem+"']//table[@class='display_meta']//th[.='Item Status (Woocommerce):']//following-sibling::td");
+        let elem = $("//tbody[@id='order_line_items']/tr[@data-order_item_id ='"+lineID+"']//table[@class='display_meta']//th[.='Item Status (Woocommerce):']//following-sibling::td");
         let elemText = elem.getText();
         super.syncVerifyContainElem(elem,elemText,yamlValue);
 

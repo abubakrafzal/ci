@@ -94,7 +94,6 @@ module.exports.loginVerify = () => {
                 let password = $('#user_pass');
                 let rememberMe = $('#rememberme');
                 let loginBtn = $('#wp-submit');
-
                 username.waitForDisplayed();
                 username.setValue(user_value);
                 // username.setValue(process.env.QA_UserName);

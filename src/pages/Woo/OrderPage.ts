@@ -7,10 +7,10 @@ import { ElementOrder, ElementCheckout } from 'src/pages/elements/Elements';
 
 // const image = fs.readFileSync('../Data/Images')
 let orderValue = yaml.safeLoad(
-    fs.readFileSync('./src/Data/Yaml/Order.yml', 'utf8')
+    fs.readFileSync('./src/Data/Yaml/Order.yml', 'utf8'),
 );
 let paymentValue = yaml.safeLoad(
-    fs.readFileSync('./src/Data/Yaml/Payment.yml', 'utf8')
+    fs.readFileSync('./src/Data/Yaml/Payment.yml', 'utf8'),
 );
 let testvalue = './src/Data/Yaml/OMSData.yml';
 
@@ -42,7 +42,7 @@ class OrderPage extends Page {
             {
                 timeout: 5000,
                 timeoutMsg: 'expected text to be different after 5s',
-            }
+            },
         );
         let pet_name = await orderValue[value]['name'];
         await add_petelem.waitForClickable();
@@ -85,25 +85,28 @@ class OrderPage extends Page {
         await breedelem.selectByVisibleText(pet_breed);
     }
 
-     selectImageFace() {
-        let uploadFaceImage =  $('//body/input[1]');
+    selectImageFace() {
+        let uploadFaceImage = $('//body/input[1]');
 
-        let elemShow =  $(
-            "//div[@class='photo_uploads section']//div[@class='left_side']//label"
+        let elemShow = $(
+            "//div[@class='photo_uploads section']//div[@class='left_side']//label",
         );
-         elemShow.isDisplayedInViewport();
-        let text =  elemShow.getText();
+        elemShow.isDisplayedInViewport();
+        let text = elemShow.getText();
         console.log(text);
-         let getTitle =  browser.getUrl();
-         let splitter = getTitle.match(/\d+/g).map(Number).join();
-         console.log(splitter);
-         this.petIdGlobal = Number(splitter);
-         browser.waitUntil(() => text === "Upload Pet's Photos", {
+        let getTitle = browser.getUrl();
+        let splitter = getTitle
+            .match(/\d+/g)
+            .map(Number)
+            .join();
+        console.log(splitter);
+        this.petIdGlobal = Number(splitter);
+        browser.waitUntil(() => text === "Upload Pet's Photos", {
             timeout: 50000,
             timeoutMsg: 'expected text to be different after 5s',
         });
-         expect(text).toContain("Upload Pet");
-         browser.pause(3000);
+        expect(text).toContain('Upload Pet');
+        browser.pause(3000);
 
         // await browser.execute(
         //     // assign style to elem in the browser
@@ -116,9 +119,9 @@ class OrderPage extends Page {
         //     // pass in element so we don't need to query it again in the browser
         //     $("//body/input[1]")
         // );
-         browser.execute(
+        browser.execute(
             // assign style to elem in the browser
-            el => (
+            (el) => (
                 (el.style.top = '100px'),
                 (el.style.position = 'absolute'),
                 (el.style.width = '100px'),
@@ -128,19 +131,18 @@ class OrderPage extends Page {
             ),
 
             // pass in element so we don't need to query it again in the browser
-             $('//body/input[1]')
+            $('//body/input[1]'),
         );
 
-         uploadFaceImage.waitForDisplayed();
+        uploadFaceImage.waitForDisplayed();
 
         const relativepath = './src/Data/Images/Dog/face.jpeg';
         const filePath = path.join(process.cwd(), relativepath);
-         browser.pause(1500);
+        browser.pause(1500);
         const val = browser.uploadFile(filePath);
         uploadFaceImage.setValue(val);
-         browser.pause(1500);
-
-     }
+        browser.pause(1500);
+    }
 
     /*----------------------------------------------------------------
 
@@ -150,17 +152,17 @@ class OrderPage extends Page {
         let elementEyeColour = await $(
             "//div[@class='left_column right_eye_container']//span[contains(text(),'" +
                 yamlColor +
-                "')]"
+                "')]",
         );
         await elementEyeColour.scrollIntoView();
         await super.waitAndclick(elementEyeColour);
-        console.log("eyeee");
+        console.log('eyeee');
     }
     async selectEarPairs() {
         let leftEar = await $(ElementOrder.leftEar);
         let RightEar = await $(ElementOrder.RightEar);
         await browser.pause(5000);
-        await console.log("left ear ");
+        await console.log('left ear ');
         await leftEar.scrollIntoView();
         await leftEar.waitForExist();
         await leftEar.click();
@@ -183,12 +185,26 @@ class OrderPage extends Page {
     }
     async clickProductNav() {
         let productElem = await $(ElementOrder.productElem);
-        await productElem.waitForDisplayed();
-        await productElem.click();
+        try {
+
+            await productElem.waitForDisplayed();
+            await expect(productElem).toBeDisplayedInViewport();
+            browser.pause(3000);
+            await productElem.waitForClickable();
+            await browser.execute('arguments[0].click();', productElem);
+
+
+        } catch (e) {
+            await productElem.waitForClickable();
+            await expect(productElem).toBeDisplayedInViewport();
+            await productElem.click();
+            await browser.execute('arguments[0].click();', productElem);
+            await expect(productElem).toBeVisible();
+        }
     }
     async clickOnItem(value) {
         let itemElem = await $(
-            "//li[@class='dropdown-header']/..//li//a[text()=\"" + value + '"]'
+            "//li[@class='dropdown-header']/..//li//a[text()=\"" + value + '"]',
         );
         let dropdownShowElem = await $(ElementOrder.dropdownShowElem);
         await dropdownShowElem.waitForExist();
@@ -202,27 +218,28 @@ class OrderPage extends Page {
     async selectPet() {
         // let selectPet = await $(ElementOrder.selectPet);
         try {
-            let petId = await orderValue["pet_id"];
-
-            let selectPet = await $("//div[@id='pet_"+petId+"']//a//b")
-            await browser.pause(4000);
-            await selectPet.scrollIntoView();
-            await super.waitTillViewPort(selectPet);
-            await selectPet.waitForClickable();
-            await selectPet.click();
-
-
-        }
-        catch (e){
-            let selectpet = await $("//div[@class='change_pet']//div[1]//a[1]//b[1]");
+            let selectpet = await $(
+                "//div[@class='change_pet']//div[1]//a[1]//b[1]",
+            );
             await browser.pause(4000);
             await selectpet.scrollIntoView();
             await super.waitTillViewPort(selectpet);
             await selectpet.waitForClickable();
             await selectpet.click();
 
+
+
+        } catch (e) {
+            let petId = await orderValue['pet_id'];
+
+            let selectPet = await $("//div[@id='pet_" + petId + "']//a//b");
+            await browser.pause(4000);
+            await selectPet.scrollIntoView();
+            await super.waitTillViewPort(selectPet);
+            await selectPet.waitForClickable();
+            await selectPet.click();
         }
-     }
+    }
     async confirmBtn() {
         let confirmElem = await $(ElementOrder.confirmElem);
 
@@ -233,9 +250,9 @@ class OrderPage extends Page {
 
         const result = await browser.execute(
             // assign style to elem in the browser
-            el => (el.style.width = 'inherit'),
+            (el) => (el.style.width = 'inherit'),
             // pass in element so we don't need to query it again in the browser
-            addCartelem
+            addCartelem,
         );
         await addCartelem.scrollIntoView();
         await browser.pause(2000);
@@ -295,10 +312,15 @@ class OrderPage extends Page {
             await cardNum.addValue(yamlCardNumber);
         }
         await browser.switchToParentFrame();
+        console.log("switch back");
+        browser.pause(3000);
     }
     async EnterValueExpire(value) {
-        let iframeElem = await $("//iframe[@name='__privateStripeFrame7']");
+        console.log("iframe start");
+        let iframeElem = await $("//iframe[@title='Secure expiration date input frame']");
         await browser.switchToFrame(iframeElem);
+        console.log("iframe end");
+
         let expireDateElem = await $(ElementCheckout.expireDateElem);
         let yamlCardMonth = await paymentValue[value]['month'];
         let yamlCardYear = await paymentValue[value]['year'];
@@ -309,7 +331,7 @@ class OrderPage extends Page {
     }
     async EnterValueCVC(value) {
         await browser.pause(1000);
-        let iframeElem = await $("//iframe[@name='__privateStripeFrame8']");
+        let iframeElem = await $("//iframe[@title='Secure CVC input frame']");
         await browser.switchToFrame(iframeElem);
         let cvvNum = await $(ElementCheckout.cvcElem);
         let yamlCardNumber = await paymentValue[value]['cvc'];
@@ -317,7 +339,5 @@ class OrderPage extends Page {
 
         await browser.switchToParentFrame();
     }
-
-
 }
 export default new OrderPage();

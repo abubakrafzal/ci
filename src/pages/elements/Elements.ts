@@ -22,7 +22,7 @@ export const ElementOrder = {
 
     ageElem: "//select[@id='age']",
 
-    productElem: "//li[@class='dropdown menu-large nav-item']//a[@class='dropdown-toggle nav-link']",
+    productElem: "//a[@class='dropdown-toggle nav-link'][contains(text(),'Products')]",
 
     dropdownShowElem: "//ul[@class='dropdown-menu megamenu show']",
 
@@ -141,6 +141,7 @@ Shipping ELement WPADMIN
     rushDeliveryDuration:"/html//tbody[@id='order_line_items']/tr[2]/td[@class='name']/div[4]",
 }
 export const ElementOMSHome = {
+
     headingElem: "//div[@id='login']//h2",
 
     usernameElem : "//input[@id='employee_email']",
@@ -158,7 +159,8 @@ export const ElementOMSHome = {
     productsElem : "//li[@id='products']//a",
     shipStationOrdersElem : "//li[@id='shipstation_orders']//a",
     statusMappingsElem : "//li[@id='status_mappings']//a",
-
+    loggedInMsg:"//div[@class='flash flash_alert']",
+    alreadyLoggedInMsg:"//div[@class='flash flash_notice']",
     orderNumberElem : "//input[@id='order_id']",
 
 };
