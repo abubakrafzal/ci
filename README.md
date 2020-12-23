@@ -39,4 +39,4 @@
 >>https://nodejs.org/en/download/
 
     Java JDK 1.8 must be installed to run allure reports
->>https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
+>>https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html# ci
