@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image:cimg/node:14.13.0
+      - image: cimg/node:14.13.0
     steps:
       - checkout
       - run: node —-version
